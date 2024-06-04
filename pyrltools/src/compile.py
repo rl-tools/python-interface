@@ -152,11 +152,11 @@ def compile(source, module, flags=[], enable_optimization=True, force_recompile=
                     print("_______OUTPUT_______")
                     print(result.stdout)
                     print(result.stderr)
-                raise Exception(f"Failed to compile the PyRLtools interface using {compiler}.")
+                raise Exception(f"Failed to compile the RLtools interface using {compiler}.")
             with open(cmd_path, "w") as f:
                 f.write(command_string)
-            print(f"Finished compiling the PyRLtools interface.", flush=True)
+            print(f"Finished compiling the RLtools interface.", flush=True)
             break
     else:
-        print("Using cached PyRLtools interface.", flush=True)
+        print("Using cached RLtools interface.", flush=True)
     return output_path

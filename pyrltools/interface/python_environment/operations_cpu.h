@@ -10,15 +10,15 @@ void observe_state(pybind11::array observation_array, typename PythonEnvironment
     bool observation_is_float = observation_info.format == pybind11::format_descriptor<float>::format();
     bool observation_is_double = observation_info.format == pybind11::format_descriptor<double>::format();
     if (!observation_is_float && !observation_is_double){
-        throw std::runtime_error(std::string("Incompatible buffer format: [") + observation_info.format + std::string("]. Check the floating point type of the observation returned by env.step() and the one configured when building the PyRLtools interface"));
+        throw std::runtime_error(std::string("Incompatible buffer format: [") + observation_info.format + std::string("]. Check the floating point type of the observation returned by env.step() and the one configured when building the RLtools interface"));
     } 
     if(observation_info.ndim != 1){
-        throw std::runtime_error("Incompatible buffer format. Check the dimension of the observation returned by env.step() and the one configured when building the PyRLtools interface");
+        throw std::runtime_error("Incompatible buffer format. Check the dimension of the observation returned by env.step() and the one configured when building the RLtools interface");
     }
 
     size_t num_elements = observation_info.shape[0];
     if(num_elements != SPEC::OBSERVATION_DIM){
-        throw std::runtime_error("Incompatible observation dimension. Check the dimension of the observation returned by env.step() and the one configured when building the PyRLtools interface");
+        throw std::runtime_error("Incompatible observation dimension. Check the dimension of the observation returned by env.step() and the one configured when building the RLtools interface");
     }
 
     if(observation_info.format == pybind11::format_descriptor<T>::format()){
@@ -44,10 +44,10 @@ namespace rl_tools{
         auto low = action_space.attr("low").template cast<pybind11::array_t<T>>();
         auto high = action_space.attr("high").template cast<pybind11::array_t<T>>();
         if(low.ndim() != 1 || high.ndim() != 1){
-            throw std::runtime_error("Incompatible action space shape. Check the action space format returned by env.action_space (should be 1D and continuous) and the one configured when building the PyRLtools interface");
+            throw std::runtime_error("Incompatible action space shape. Check the action space format returned by env.action_space (should be 1D and continuous) and the one configured when building the RLtools interface");
         }
         if(low.shape(0) != SPEC::ACTION_DIM || high.shape(0) != SPEC::ACTION_DIM){
-            throw std::runtime_error("Incompatible action space dimension. Limits: low " + std::to_string(low.shape(0)) + ", high " + std::to_string(high.shape(0)) + " (expected " + std::to_string(SPEC::ACTION_DIM) + "). Check the action space dimension returned by env.action_space and the one configured when building the PyRLtools interface");
+            throw std::runtime_error("Incompatible action space dimension. Limits: low " + std::to_string(low.shape(0)) + ", high " + std::to_string(high.shape(0)) + " (expected " + std::to_string(SPEC::ACTION_DIM) + "). Check the action space dimension returned by env.action_space and the one configured when building the RLtools interface");
         }
         for(TI action_i=0; action_i<SPEC::ACTION_DIM; action_i++){
             T current_low = low.at(action_i);

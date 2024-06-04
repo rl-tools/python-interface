@@ -118,12 +118,12 @@ namespace PYRLTOOLS_MODULE_NAME{
         pybind11::array_t<T> action(const pybind11::array_t<T>& observation){
             pybind11::buffer_info observation_info = observation.request();
             if (observation_info.format != pybind11::format_descriptor<T>::format() || observation_info.ndim != 1) {
-                throw std::runtime_error("Incompatible buffer format. Check the floating point type of the observation returned by env.step() and the one configured when building the PyRLtools interface");
+                throw std::runtime_error("Incompatible buffer format. Check the floating point type of the observation returned by env.step() and the one configured when building the RLtools interface");
             }
             auto observation_data_ptr = static_cast<T*>(observation_info.ptr);
             size_t num_elements = observation_info.shape[0];
             if(num_elements != ENVIRONMENT::OBSERVATION_DIM){
-                throw std::runtime_error("Incompatible observation dimension. Check the dimension of the observation returned by env.step() and the one configured when building the PyRLtools interface");
+                throw std::runtime_error("Incompatible observation dimension. Check the dimension of the observation returned by env.step() and the one configured when building the RLtools interface");
             }
             rlt::MatrixStatic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::OBSERVATION_DIM>> observation_rlt;
             rlt::malloc(device, observation_rlt);

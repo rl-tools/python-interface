@@ -15,7 +15,7 @@ def PPO(env_factory, # can be either a lambda that creates a new Gym-like enviro
     enable_evaluation=True,
     evaluation_interval=None,
     num_evaluation_episodes=10,
-    interface_name="default", # this is the namespace used for the compilation of the PyRLtools interface (in a temporary directory) and should be unique if run in parallel. We don't choose a random uuid because it would invalidate the cache and require a re-compilation every time
+    interface_name="default", # this is the namespace used for the compilation of the RLtools interface (in a temporary directory) and should be unique if run in parallel. We don't choose a random uuid because it would invalidate the cache and require a re-compilation every time
     # Compile-time parameters:
     # Same set of parameters as: rl::algorithms::ppo::DefaultParameters
     GAMMA = 0.99,

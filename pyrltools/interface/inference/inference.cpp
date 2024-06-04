@@ -32,12 +32,12 @@ pybind11::array_t<T> evaluate(const pybind11::array_t<T>& input){
     init();
     pybind11::buffer_info input_info = input.request();
     if (input_info.format != pybind11::format_descriptor<T>::format() || input_info.ndim != 1) {
-        throw std::runtime_error("Incompatible buffer format. Check the floating point type of the input and the one configured when building the PyRLtools interface");
+        throw std::runtime_error("Incompatible buffer format. Check the floating point type of the input and the one configured when building the RLtools interface");
     }
     auto input_data_ptr = static_cast<T*>(input_info.ptr);
     size_t num_elements = input_info.shape[0];
     if(num_elements != MODEL_TYPE::INPUT_DIM){
-        throw std::runtime_error("Incompatible input dimension. Check the dimension of the input and the one configured when building the PyRLtools interface");
+        throw std::runtime_error("Incompatible input dimension. Check the dimension of the input and the one configured when building the RLtools interface");
     }
     rlt::MatrixStatic<rlt::matrix::Specification<T, TI, 1, MODEL_TYPE::INPUT_DIM>> input_rlt;
     rlt::malloc(device, input_rlt);
