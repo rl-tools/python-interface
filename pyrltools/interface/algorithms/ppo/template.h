@@ -8,8 +8,8 @@
 namespace rlt = rl_tools;
 
 template<typename T, typename TI, typename ENVIRONMENT, TI T_EPISODE_STEP_LIMIT>
-struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::Parameters<T, TI, ENVIRONMENT>{
-    struct PPO_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::Parameters<T, TI, ENVIRONMENT>{
+struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultParameters<T, TI, ENVIRONMENT>{
+    struct PPO_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultParameters<T, TI, ENVIRONMENT>{
         static constexpr T GAMMA = $GAMMA;
         static constexpr T LAMBDA = $LAMBDA;
         static constexpr T EPSILON_CLIP = $EPSILON_CLIP;

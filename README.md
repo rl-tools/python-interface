@@ -12,9 +12,9 @@ pip install pyrltools gymnasium
 
 ### Example:
 ```
-from gymnasium.experimental.wrappers import RescaleActionV0
 from pyrltools import SAC
 import gymnasium as gym
+from gymnasium.experimental.wrappers import RescaleActionV0
 
 seed = 0xf00d
 def env_factory():
