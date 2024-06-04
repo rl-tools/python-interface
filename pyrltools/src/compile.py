@@ -139,7 +139,7 @@ def compile(source, module, flags=[], enable_optimization=True, force_recompile=
             old_command_string = f.read()
     if old_command_string is None or (not old_command_string in command_strings) or not os.path.exists(output_path) or force_recompile or "PYRLTOOLS_FORCE_RECOMPILE" in os.environ:
         for compiler, cmd, command_string in zip(compilers, cmds, command_strings):
-            print(f"Compiling the PyRLtools interface...", flush=True)
+            print(f"Compiling the RLtools interface...", flush=True)
             verbose_actual = verbose or "PYRLTOOLS_FORCE_COMPILE_VERBOSE" in os.environ
             run_kwargs = {"cwd": output_dir} if sys.platform.startswith('win') else {}
             run_kwargs = {**run_kwargs, **({} if verbose_actual else {"capture_output": True, "text": True})}
