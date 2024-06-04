@@ -1,4 +1,4 @@
-from tinyrl import SAC
+from pyrltools import SAC
 import os 
 
 seed = 0xf00d

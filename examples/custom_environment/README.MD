@@ -7,7 +7,7 @@ To use custom C++ environments you should provide an [environment.h](./environme
 - `reward`: Reward function
 - `terminated`: Relation that returns if a state is terminal
 
-Then you can use TinyRL to train an agent for this environment by creating a specification for this environment:
+Then you can use PyRLtools to train an agent for this environment by creating a specification for this environment:
 ```
 custom_environment = {
     "path": os.path.dirname(os.path.abspath(__file__)),

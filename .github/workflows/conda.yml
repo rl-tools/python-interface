@@ -1,4 +1,4 @@
-name: Test TinyRL using conda
+name: Test PyRLtools using conda
 
 on: [push]
 
@@ -24,7 +24,7 @@ jobs:
 
     - name: Checkout External Submodules
       run: |
-        git submodule update --init -- tinyrl/external/rl_tools
+        git submodule update --init -- pyrltools/external/rl_tools
 
     - name: Update pip
       run: |
@@ -45,15 +45,15 @@ jobs:
     - name: Test with pytest
       if: matrix.mkl == 'no'
       env:
-        TINYRL_FORCE_RECOMPILE: ""
-        TINYRL_FORCE_COMPILE_VERBOSE: ""
-        TINYRL_DISABLE_PYTORCH_IMPORT_TEST: ""
+        PYRLTOOLS_FORCE_RECOMPILE: ""
+        PYRLTOOLS_FORCE_COMPILE_VERBOSE: ""
+        PYRLTOOLS_DISABLE_PYTORCH_IMPORT_TEST: ""
       run: |
         pytest tests -s
     - name: Test with pytest (force MKL)
       if: matrix.mkl == 'yes'
       env: 
-        TINYRL_FORCE_MKL: 1
-        TINYRL_DISABLE_PYTORCH_IMPORT_TEST: ""
+        PYRLTOOLS_FORCE_MKL: 1
+        PYRLTOOLS_DISABLE_PYTORCH_IMPORT_TEST: ""
       run: |
         pytest tests -s

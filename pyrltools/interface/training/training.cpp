@@ -1,15 +1,15 @@
-#ifndef TINYRL_MODULE_NAME
-#error "TINYRL_MODULE_NAME not defined"
+#ifndef PYRLTOOLS_MODULE_NAME
+#error "PYRLTOOLS_MODULE_NAME not defined"
 #endif
 
-#ifndef TINYRL_DTYPE
-#define TINYRL_DTYPE float
+#ifndef PYRLTOOLS_DTYPE
+#define PYRLTOOLS_DTYPE float
 #endif
 
 #include <rl_tools/operations/cpu_mux.h>
 #include <rl_tools/nn/operations_cpu_mux.h>
 
-#ifdef TINYRL_USE_PYTHON_ENVIRONMENT
+#ifdef PYRLTOOLS_USE_PYTHON_ENVIRONMENT
 #include "../python_environment/operations_cpu.h"
 #else
 #include <environment.h>
@@ -35,35 +35,35 @@ namespace rlt = rl_tools;
 #include <pybind11/stl.h>
 
 
-namespace TINYRL_MODULE_NAME{
+namespace PYRLTOOLS_MODULE_NAME{
     using DEVICE = rlt::devices::DEVICE_FACTORY<>;
-#ifdef TINYRL_FORCE_BLAS
+#ifdef PYRLTOOLS_FORCE_BLAS
     static_assert(DEVICE::DEVICE_ID == rlt::devices::DeviceId::CPU_MKL || DEVICE::DEVICE_ID == rlt::devices::DeviceId::CPU_ACCELERATE || DEVICE::DEVICE_ID == rlt::devices::DeviceId::CPU_OPENBLAS);
 #endif
     using RNG = decltype(rlt::random::default_engine(typename DEVICE::SPEC::RANDOM{}));
     using TI = typename DEVICE::index_t;
 
-    using T = TINYRL_DTYPE;
+    using T = PYRLTOOLS_DTYPE;
 
 
-    #ifdef TINYRL_USE_PYTHON_ENVIRONMENT
-    constexpr TI OBSERVATION_DIM = TINYRL_OBSERVATION_DIM;
-    constexpr TI ACTION_DIM = TINYRL_ACTION_DIM;
+    #ifdef PYRLTOOLS_USE_PYTHON_ENVIRONMENT
+    constexpr TI OBSERVATION_DIM = PYRLTOOLS_OBSERVATION_DIM;
+    constexpr TI ACTION_DIM = PYRLTOOLS_ACTION_DIM;
     using ENVIRONMENT_SPEC = PythonEnvironmentSpecification<T, TI, OBSERVATION_DIM, ACTION_DIM>;
     using ENVIRONMENT = PythonEnvironment<ENVIRONMENT_SPEC>;
     #else
     using ENVIRONMENT = ENVIRONMENT_FACTORY<T, TI>;
     #endif
 
-    #ifdef TINYRL_EPISODE_STEP_LIMIT
-    constexpr TI EPISODE_STEP_LIMIT = TINYRL_EPISODE_STEP_LIMIT;
+    #ifdef PYRLTOOLS_EPISODE_STEP_LIMIT
+    constexpr TI EPISODE_STEP_LIMIT = PYRLTOOLS_EPISODE_STEP_LIMIT;
     #else
     constexpr TI EPISODE_STEP_LIMIT = ENVIRONMENT::EPISODE_STEP_LIMIT;
     #endif
 
 
 
-    // #ifdef TINYRL_USE_PPO
+    // #ifdef PYRLTOOLS_USE_PPO
     // using LOOP_CORE_CONFIG = PPO_LOOP_CORE_CONFIG<T, TI, RNG, ENVIRONMENT, EPISODE_STEP_LIMIT>;
     // #else
     using LOOP_CORE_CONFIG = LOOP_CORE_CONFIG_FACTORY<T, TI, RNG, ENVIRONMENT, EPISODE_STEP_LIMIT>;
@@ -73,13 +73,13 @@ namespace TINYRL_MODULE_NAME{
 
     DEVICE device;
 
-    #ifdef TINYRL_ENABLE_EVALUATION
+    #ifdef PYRLTOOLS_ENABLE_EVALUATION
     constexpr bool ENABLE_EVALUATION = true;
-    #ifndef TINYRL_EVALUATION_INTERVAL
-    #error "TINYRL_EVALUATION_INTERVAL not defined"
+    #ifndef PYRLTOOLS_EVALUATION_INTERVAL
+    #error "PYRLTOOLS_EVALUATION_INTERVAL not defined"
     #else
-    constexpr TI PARAMETER_EVALUATION_INTERVAL = TINYRL_EVALUATION_INTERVAL;
-    constexpr TI PARAMETER_NUM_EVALUATION_EPISODES = TINYRL_NUM_EVALUATION_EPISODES;
+    constexpr TI PARAMETER_EVALUATION_INTERVAL = PYRLTOOLS_EVALUATION_INTERVAL;
+    constexpr TI PARAMETER_NUM_EVALUATION_EPISODES = PYRLTOOLS_NUM_EVALUATION_EPISODES;
 
     template <typename NEXT>
     struct LOOP_EVAL_PARAMETERS: rlt::rl::loop::steps::evaluation::Parameters<T, TI, NEXT>{
@@ -97,7 +97,7 @@ namespace TINYRL_MODULE_NAME{
     using LOOP_CONFIG = LOOP_TIMING_CONFIG;
     using LOOP_STATE = typename LOOP_CONFIG::template State<LOOP_CONFIG>;
 
-    #ifdef TINYRL_USE_PYTHON_ENVIRONMENT
+    #ifdef PYRLTOOLS_USE_PYTHON_ENVIRONMENT
     void set_environment_factory(std::function<pybind11::object()> p_environment_factory){
         environment_factory = p_environment_factory;
         auto python_atexit = pybind11::module_::import("atexit");
@@ -117,12 +117,12 @@ namespace TINYRL_MODULE_NAME{
         pybind11::array_t<T> action(const pybind11::array_t<T>& observation){
             pybind11::buffer_info observation_info = observation.request();
             if (observation_info.format != pybind11::format_descriptor<T>::format() || observation_info.ndim != 1) {
-                throw std::runtime_error("Incompatible buffer format. Check the floating point type of the observation returned by env.step() and the one configured when building the TinyRL interface");
+                throw std::runtime_error("Incompatible buffer format. Check the floating point type of the observation returned by env.step() and the one configured when building the PyRLtools interface");
             }
             auto observation_data_ptr = static_cast<T*>(observation_info.ptr);
             size_t num_elements = observation_info.shape[0];
             if(num_elements != ENVIRONMENT::OBSERVATION_DIM){
-                throw std::runtime_error("Incompatible observation dimension. Check the dimension of the observation returned by env.step() and the one configured when building the TinyRL interface");
+                throw std::runtime_error("Incompatible observation dimension. Check the dimension of the observation returned by env.step() and the one configured when building the PyRLtools interface");
             }
             rlt::MatrixStatic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::OBSERVATION_DIM>> observation_rlt;
             rlt::malloc(device, observation_rlt);
@@ -158,14 +158,14 @@ namespace TINYRL_MODULE_NAME{
 
 
 
-PYBIND11_MODULE(TINYRL_MODULE_NAME, m){
-    m.doc() = "TinyRL Training Loop";
-    pybind11::class_<TINYRL_MODULE_NAME::State>(m, "State")
-            .def(pybind11::init<TINYRL_MODULE_NAME::TI>())
-            .def("step", &TINYRL_MODULE_NAME::State::step, "Step the loop")
-            .def("action", &TINYRL_MODULE_NAME::State::action, "Get the action for the given observation")
-            .def("export_policy", &TINYRL_MODULE_NAME::State::export_policy, "Export the policy to a python file");
-#ifdef TINYRL_USE_PYTHON_ENVIRONMENT
-    m.def("set_environment_factory", &TINYRL_MODULE_NAME::set_environment_factory, "Set the environment factory");
+PYBIND11_MODULE(PYRLTOOLS_MODULE_NAME, m){
+    m.doc() = "PyRLtools Training Loop";
+    pybind11::class_<PYRLTOOLS_MODULE_NAME::State>(m, "State")
+            .def(pybind11::init<PYRLTOOLS_MODULE_NAME::TI>())
+            .def("step", &PYRLTOOLS_MODULE_NAME::State::step, "Step the loop")
+            .def("action", &PYRLTOOLS_MODULE_NAME::State::action, "Get the action for the given observation")
+            .def("export_policy", &PYRLTOOLS_MODULE_NAME::State::export_policy, "Export the policy to a python file");
+#ifdef PYRLTOOLS_USE_PYTHON_ENVIRONMENT
+    m.def("set_environment_factory", &PYRLTOOLS_MODULE_NAME::set_environment_factory, "Set the environment factory");
 #endif
 }

@@ -1,4 +1,4 @@
-from tinyrl import SAC
+from pyrltools import SAC
 import gymnasium as gym
 from gymnasium.experimental.wrappers import RescaleActionV0
 import math

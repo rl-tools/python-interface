@@ -1,16 +1,16 @@
 import os
-os.environ["TINYRL_IGNORE_TORCH_WARNING"] = "1"
+os.environ["PYRLTOOLS_IGNORE_TORCH_WARNING"] = "1"
 
-if not "TINYRL_DISABLE_PYTORCH_IMPORT_TEST" in os.environ:
+if not "PYRLTOOLS_DISABLE_PYTORCH_IMPORT_TEST" in os.environ:
     import torch
     import torch.nn as nn
-    from tinyrl import CACHE_PATH
-    from tinyrl.onnx import load_mlp, evaluate
-    from tinyrl.onnx import render
-    from tinyrl import load_checkpoint_from_path
+    from pyrltools import CACHE_PATH
+    from pyrltools.onnx import load_mlp, evaluate
+    from pyrltools.onnx import render
+    from pyrltools import load_checkpoint_from_path
 
 def test_pytorch_import():
-    if "TINYRL_DISABLE_PYTORCH_IMPORT_TEST" in os.environ:
+    if "PYRLTOOLS_DISABLE_PYTORCH_IMPORT_TEST" in os.environ:
         return
     torch.manual_seed(0)
 

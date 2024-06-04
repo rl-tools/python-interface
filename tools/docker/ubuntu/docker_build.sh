@@ -1,1 +1,1 @@
-docker build --platform linux/amd64 -t tinyrl:ubuntu . $@
+docker build --platform linux/amd64 -t pyrltools:ubuntu . $@

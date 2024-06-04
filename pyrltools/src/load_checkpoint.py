@@ -18,7 +18,7 @@ def load_checkpoint(checkpoint, interface_name="default", force_recompile=False,
     with open(output_path, "w") as f:
         f.write(checkpoint)
 
-    module_flag = f'-DTINYRL_MODULE_NAME={module_name}'
+    module_flag = f'-DPYRLTOOLS_MODULE_NAME={module_name}'
     header_search_path_flag = f'-I{output_directory}'
 
     flags = [module_flag, header_search_path_flag]

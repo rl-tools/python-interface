@@ -8,7 +8,7 @@ library_lookup = {
     "sb3": "Stable Baselines3",
     "cleanrl": "CleanRL",
     "cleanrltrunc": "CleanRL (Fixed Truncation)",
-    "tinyrl": "TinyRL / RLtools",
+    "pyrltools": "PyRLtools / RLtools",
     "sbx": "SBX",
 }
 

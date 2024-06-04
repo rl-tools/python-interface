@@ -15,14 +15,14 @@ def env_factory_factory(config, **kwargs):
         return env
     return env_factory
 
-def train_tinyrl(config, use_python_environment=True):
+def train_pyrltools(config, use_python_environment=True):
     custom_environment = {
         "path": os.path.abspath("../custom_environment"),
         "action_dim": 1,
         "observation_dim": 3,
     }
     env_factory = env_factory_factory(config)
-    from tinyrl import SAC
+    from pyrltools import SAC
     example_env = env_factory() 
     kwargs = {
         "STEP_LIMIT": config["n_steps"],
@@ -37,7 +37,7 @@ def train_tinyrl(config, use_python_environment=True):
     }
     interface_name = str(config["seed"])
     if use_python_environment:
-        sac = SAC(env_factory, enable_evaluation=False, interface_name=interface_name, force_recompile=not "TINYRL_SKIP_FORCE_RECOMPILE" in os.environ, **kwargs)
+        sac = SAC(env_factory, enable_evaluation=False, interface_name=interface_name, force_recompile=not "PYRLTOOLS_SKIP_FORCE_RECOMPILE" in os.environ, **kwargs)
     else:
         sac = SAC(custom_environment, interface_name=interface_name, **kwargs)
     state = sac.State(config["seed"])

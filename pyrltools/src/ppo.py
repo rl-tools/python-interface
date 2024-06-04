@@ -15,7 +15,7 @@ def PPO(env_factory, # can be either a lambda that creates a new Gym-like enviro
     enable_evaluation=True,
     evaluation_interval=None,
     num_evaluation_episodes=10,
-    interface_name="default", # this is the namespace used for the compilation of the TinyRL interface (in a temporary directory) and should be unique if run in parallel. We don't choose a random uuid because it would invalidate the cache and require a re-compilation every time
+    interface_name="default", # this is the namespace used for the compilation of the PyRLtools interface (in a temporary directory) and should be unique if run in parallel. We don't choose a random uuid because it would invalidate the cache and require a re-compilation every time
     # Compile-time parameters:
     # Same set of parameters as: rl::algorithms::ppo::DefaultParameters
     GAMMA = 0.99,
@@ -60,17 +60,17 @@ def PPO(env_factory, # can be either a lambda that creates a new Gym-like enviro
     ):
     assert STEP_LIMIT is not None or TOTAL_STEP_LIMIT is not None, "Either STEP_LIMIT or TOTAL_STEP_LIMIT must be set"
     evaluation_interval = evaluation_interval if evaluation_interval is not None else 10
-    verbose = verbose or "TINYRL_VERBOSE" in os.environ
+    verbose = verbose or "PYRLTOOLS_VERBOSE" in os.environ
     if STEP_LIMIT is None:
         STEP_LIMIT = math.floor(TOTAL_STEP_LIMIT/(ON_POLICY_RUNNER_STEPS_PER_ENV * N_ENVIRONMENTS))
 
     compile_time_parameters = sanitize_values({k:v for k, v in locals().items() if k in inspect.signature(PPO).parameters.keys()})
 
-    module_name = f'tinyrl_ppo_{interface_name}'
+    module_name = f'pyrltools_ppo_{interface_name}'
 
     config_template = os.path.join(absolute_path, '../interface/algorithms/ppo/template.h')
 
-    print('TinyRL Cache Path: ', CACHE_PATH) if verbose else None
+    print('PyRLtools Cache Path: ', CACHE_PATH) if verbose else None
     render_output_directory = os.path.join(CACHE_PATH, 'template', module_name)
     
     os.makedirs(render_output_directory, exist_ok=True)
@@ -80,6 +80,6 @@ def PPO(env_factory, # can be either a lambda that creates a new Gym-like enviro
         print('New PPO config detected, forcing recompilation...')
     
     loop_core_config_search_path_flag = compile_option("header_search_path", render_output_directory)
-    loop_core_config_flag = compile_option("macro_definition", "TINYRL_USE_LOOP_CORE_CONFIG")
+    loop_core_config_flag = compile_option("macro_definition", "PYRLTOOLS_USE_LOOP_CORE_CONFIG")
     flags = [loop_core_config_search_path_flag, loop_core_config_flag]
     return compile_training(module_name, env_factory, flags, verbose=verbose, force_recompile=(force_recompile or new_config), enable_evaluation=enable_evaluation, evaluation_interval=evaluation_interval, num_evaluation_episodes=num_evaluation_episodes, **kwargs)

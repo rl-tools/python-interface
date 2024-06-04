@@ -3,9 +3,9 @@ import os
 import sac
 import ppo
 import td3
-from tinyrl import CACHE_PATH
+from pyrltools import CACHE_PATH
 
-TINYRL_FULL_RUN = "TINYRL_FULL_RUN" in os.environ
+PYRLTOOLS_FULL_RUN = "PYRLTOOLS_FULL_RUN" in os.environ
 
 
 global_config = {
@@ -15,7 +15,7 @@ global_config = {
 environment_configs = {
     "SAC": {
         "Pendulum-v1": {
-            "n_seeds": 100 if TINYRL_FULL_RUN else 10,
+            "n_seeds": 100 if PYRLTOOLS_FULL_RUN else 10,
             "n_steps": 20000,
             "evaluation_interval": 100,
             "hidden_dim": 64,
@@ -24,8 +24,8 @@ environment_configs = {
             "batch_size": 100,
         },
         "Hopper-v4": {
-            "n_seeds": 30 if TINYRL_FULL_RUN else 10,
-            "n_steps": 1000000 if TINYRL_FULL_RUN else 100000,
+            "n_seeds": 30 if PYRLTOOLS_FULL_RUN else 10,
+            "n_steps": 1000000 if PYRLTOOLS_FULL_RUN else 100000,
             "evaluation_interval": 1000,
             "hidden_dim": 256,
             "learning_rate": 3e-4,
@@ -33,8 +33,8 @@ environment_configs = {
             "batch_size": 256,
         },
         "Ant-v4": {
-            "n_seeds": 30 if TINYRL_FULL_RUN else 10,
-            "n_steps": 1000000 if TINYRL_FULL_RUN else 100000,
+            "n_seeds": 30 if PYRLTOOLS_FULL_RUN else 10,
+            "n_steps": 1000000 if PYRLTOOLS_FULL_RUN else 100000,
             "evaluation_interval": 1000,
             "hidden_dim": 256,
             "learning_rate": 3e-4,
@@ -44,7 +44,7 @@ environment_configs = {
     },
     "PPO": {
         "Pendulum-v1": {
-            "n_seeds": 100 if TINYRL_FULL_RUN else 10,
+            "n_seeds": 100 if PYRLTOOLS_FULL_RUN else 10,
             "n_steps": 73, # ~ 300k steps
             "evaluation_interval": 1,
             "learning_rate": 1e-3,
@@ -61,7 +61,7 @@ environment_configs = {
             "initial_action_std": 2.0
         },
         "Hopper-v4": {
-            "n_seeds": 30 if TINYRL_FULL_RUN else 10,
+            "n_seeds": 30 if PYRLTOOLS_FULL_RUN else 10,
             "n_steps": 1000, # ~ 300k steps
             "evaluation_interval": 10,
             "learning_rate": 1e-4,
@@ -78,7 +78,7 @@ environment_configs = {
             "initial_action_std": 1
         },
         "Ant-v4": {
-            "n_seeds": 30 if TINYRL_FULL_RUN else 10,
+            "n_seeds": 30 if PYRLTOOLS_FULL_RUN else 10,
             "n_steps": 1000, # ~ 300k steps
             "evaluation_interval": 10,
             "learning_rate": 1e-4,
@@ -97,7 +97,7 @@ environment_configs = {
     },
     "TD3": {
         "Pendulum-v1": {
-            "n_seeds": 100 if TINYRL_FULL_RUN else 10,
+            "n_seeds": 100 if PYRLTOOLS_FULL_RUN else 10,
             "n_steps": 40000,
             "evaluation_interval": 100,
             "hidden_dim": 64,
@@ -111,8 +111,8 @@ environment_configs = {
             "gamma": 0.99
         },
         "Hopper-v4": {
-            "n_seeds": 30 if TINYRL_FULL_RUN else 10,
-            "n_steps": 1000000 if TINYRL_FULL_RUN else 100000,
+            "n_seeds": 30 if PYRLTOOLS_FULL_RUN else 10,
+            "n_steps": 1000000 if PYRLTOOLS_FULL_RUN else 100000,
             "evaluation_interval": 1000,
             "hidden_dim": 256,
             "learning_rate": 3e-4,
@@ -125,8 +125,8 @@ environment_configs = {
             "gamma": 0.99
         },
         "Ant-v4": {
-            "n_seeds": 30 if TINYRL_FULL_RUN else 10,
-            "n_steps": 1000000 if TINYRL_FULL_RUN else 100000,
+            "n_seeds": 30 if PYRLTOOLS_FULL_RUN else 10,
+            "n_steps": 1000000 if PYRLTOOLS_FULL_RUN else 100000,
             "evaluation_interval": 1000,
             "hidden_dim": 256,
             "learning_rate": 3e-4,
@@ -144,19 +144,19 @@ environment_configs = {
 library_configs = {
     "SAC":{
         # "Pendulum-v1": {
-        #     "tinyrl": {**sac.default_config_tinyrl, **environment_configs["SAC"]["Pendulum-v1"]},
+        #     "pyrltools": {**sac.default_config_pyrltools, **environment_configs["SAC"]["Pendulum-v1"]},
         #     "sb3": {**sac.default_config_sb3, **environment_configs["SAC"]["Pendulum-v1"]},
         #     "cleanrl": {**sac.default_config_cleanrl, **environment_configs["SAC"]["Pendulum-v1"]},
         #     "sbx": {**sac.default_config_cleanrl, **environment_configs["SAC"]["Pendulum-v1"]}
         # },
         # "Hopper-v4": {
-        #     "tinyrl": {**sac.default_config_tinyrl, **environment_configs["SAC"]["Hopper-v4"]},
+        #     "pyrltools": {**sac.default_config_pyrltools, **environment_configs["SAC"]["Hopper-v4"]},
         #     "sb3": {**sac.default_config_sb3, **environment_configs["SAC"]["Hopper-v4"]},
         #     "cleanrl": {**sac.default_config_cleanrl, **environment_configs["SAC"]["Hopper-v4"]},
         #     "sbx": {**sac.default_config_sbx, **environment_configs["SAC"]["Hopper-v4"]}
         # },
         # "Ant-v4": {
-        #     "tinyrl": {**sac.default_config_tinyrl, **environment_configs["SAC"]["Ant-v4"]},
+        #     "pyrltools": {**sac.default_config_pyrltools, **environment_configs["SAC"]["Ant-v4"]},
         #     "sb3": {**sac.default_config_sb3, **environment_configs["SAC"]["Ant-v4"]},
         #     "cleanrl": {**sac.default_config_cleanrl, **environment_configs["SAC"]["Ant-v4"]},
         #     "sbx": {**sac.default_config_sbx, **environment_configs["SAC"]["Ant-v4"]}
@@ -164,21 +164,21 @@ library_configs = {
     },
     "PPO":{
         # "Pendulum-v1": {
-        #     "tinyrl": {**ppo.default_config_tinyrl, **environment_configs["PPO"]["Pendulum-v1"]},
+        #     "pyrltools": {**ppo.default_config_pyrltools, **environment_configs["PPO"]["Pendulum-v1"]},
         #     "sb3": {**ppo.default_config_sb3, **environment_configs["PPO"]["Pendulum-v1"]},
         #     "cleanrl": {**ppo.default_config_cleanrl, **environment_configs["PPO"]["Pendulum-v1"]},
         #     "cleanrltrunc": {**ppo.default_config_cleanrltrunc, **environment_configs["PPO"]["Pendulum-v1"]},
         #     "sbx": {**ppo.default_config_sbx, **environment_configs["PPO"]["Pendulum-v1"]}
         # },
         # "Hopper-v4": {
-        #     "tinyrl": {**ppo.default_config_tinyrl, **environment_configs["PPO"]["Hopper-v4"]},
+        #     "pyrltools": {**ppo.default_config_pyrltools, **environment_configs["PPO"]["Hopper-v4"]},
         #     "sb3": {**ppo.default_config_sb3, **environment_configs["PPO"]["Hopper-v4"]},
         #     "cleanrl": {**ppo.default_config_cleanrl, **environment_configs["PPO"]["Hopper-v4"]},
         #     "cleanrltrunc": {**ppo.default_config_cleanrltrunc, **environment_configs["PPO"]["Hopper-v4"]},
         #     "sbx": {**ppo.default_config_sbx, **environment_configs["PPO"]["Hopper-v4"]}
         # },
         "Ant-v4": {
-            "tinyrl": {**ppo.default_config_tinyrl, **environment_configs["PPO"]["Ant-v4"]},
+            "pyrltools": {**ppo.default_config_pyrltools, **environment_configs["PPO"]["Ant-v4"]},
             "sb3": {**ppo.default_config_sb3, **environment_configs["PPO"]["Ant-v4"]},
             "cleanrl": {**ppo.default_config_cleanrl, **environment_configs["PPO"]["Ant-v4"]},
             "sbx": {**ppo.default_config_sbx, **environment_configs["PPO"]["Ant-v4"]}
@@ -186,19 +186,19 @@ library_configs = {
     },
     "TD3":{
         # "Pendulum-v1": {
-        #     "tinyrl": {**td3.default_config_tinyrl, **environment_configs["TD3"]["Pendulum-v1"]},
+        #     "pyrltools": {**td3.default_config_pyrltools, **environment_configs["TD3"]["Pendulum-v1"]},
         #     "sb3": {**td3.default_config_sb3, **environment_configs["TD3"]["Pendulum-v1"]},
         #     "cleanrl": {**td3.default_config_cleanrl, **environment_configs["TD3"]["Pendulum-v1"]},
         #     "sbx": {**td3.default_config_sbx, **environment_configs["TD3"]["Pendulum-v1"]}
         # },
         # "Hopper-v4": {
-        #     "tinyrl": {**td3.default_config_tinyrl, **environment_configs["TD3"]["Hopper-v4"]},
+        #     "pyrltools": {**td3.default_config_pyrltools, **environment_configs["TD3"]["Hopper-v4"]},
         #     "sb3": {**td3.default_config_sb3, **environment_configs["TD3"]["Hopper-v4"]},
         #     "cleanrl": {**td3.default_config_cleanrl, **environment_configs["TD3"]["Hopper-v4"]},
         #     "sbx": {**td3.default_config_sbx, **environment_configs["TD3"]["Hopper-v4"]}
         # },
         # "Ant-v4": {
-        #     "tinyrl": {**td3.default_config_tinyrl, **environment_configs["TD3"]["Ant-v4"]},
+        #     "pyrltools": {**td3.default_config_pyrltools, **environment_configs["TD3"]["Ant-v4"]},
         #     "sb3": {**td3.default_config_sb3, **environment_configs["TD3"]["Ant-v4"]},
         #     "cleanrl": {**td3.default_config_cleanrl, **environment_configs["TD3"]["Ant-v4"]},
         #     "sbx": {**td3.default_config_sbx, **environment_configs["TD3"]["Ant-v4"]}
@@ -248,9 +248,9 @@ if __name__ == "__main__":
     run_name = f"{config['algorithm']}_{config['environment_name']}_{config['library']}_{config['seed']:03d}"
     if config["algorithm"] == "SAC":
         print("Using SAC", flush=True)
-        if config["library"] == "tinyrl":
-            print("Using TinyRL", flush=True)
-            returns = sac.train_tinyrl(config)
+        if config["library"] == "pyrltools":
+            print("Using PyRLtools", flush=True)
+            returns = sac.train_pyrltools(config)
         elif config["library"] == "sb3":
             print("Using Stable-Baselines3")
             returns = sac.train_sb3(config)
@@ -264,9 +264,9 @@ if __name__ == "__main__":
             raise ValueError(f"Unknown library: {config['library']}")
     elif config["algorithm"] == "PPO":
         print("Using PPO", flush=True)
-        if config["library"] == "tinyrl":
-            print(f"Using TinyRL PPO (Cache path: {CACHE_PATH})")
-            returns = ppo.train_tinyrl(config, verbose=args.verbose)
+        if config["library"] == "pyrltools":
+            print(f"Using PyRLtools PPO (Cache path: {CACHE_PATH})")
+            returns = ppo.train_pyrltools(config, verbose=args.verbose)
         elif config["library"] == "sb3":
             print("Using Stable-Baselines3")
             returns = ppo.train_sb3(config)
@@ -283,9 +283,9 @@ if __name__ == "__main__":
             raise ValueError(f"Unknown library: {config['library']}")
     elif config["algorithm"] == "TD3":
         print("Using TD3", flush=True)
-        if config["library"] == "tinyrl":
-            print("Using TinyRL", flush=True)
-            returns = td3.train_tinyrl(config)
+        if config["library"] == "pyrltools":
+            print("Using PyRLtools", flush=True)
+            returns = td3.train_pyrltools(config)
         elif config["library"] == "sb3":
             print("Using Stable-Baselines3")
             returns = td3.train_sb3(config)

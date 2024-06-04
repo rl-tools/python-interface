@@ -16,14 +16,14 @@ def env_factory_factory(config, **kwargs):
         return env
     return env_factory
 
-def train_tinyrl(config, use_python_environment=True):
+def train_pyrltools(config, use_python_environment=True):
     custom_environment = {
         "path": os.path.join(os.path.dirname(os.path.abspath(__file__)), "../../custom_environment"),
         "action_dim": 1,
         "observation_dim": 3,
     }
     env_factory = env_factory_factory(config)
-    from tinyrl import TD3
+    from pyrltools import TD3
     example_env = env_factory() 
     default_kwargs = {
         "ACTOR_TRAINING_INTERVAL": 2, 
@@ -51,7 +51,7 @@ def train_tinyrl(config, use_python_environment=True):
     }
     interface_name = str(config["seed"])
     if use_python_environment:
-        sac = TD3(env_factory, enable_evaluation=False, interface_name=interface_name, force_recompile=not "TINYRL_SKIP_FORCE_RECOMPILE" in os.environ, **kwargs)
+        sac = TD3(env_factory, enable_evaluation=False, interface_name=interface_name, force_recompile=not "PYRLTOOLS_SKIP_FORCE_RECOMPILE" in os.environ, **kwargs)
     else:
         sac = TD3(custom_environment, interface_name=interface_name, **kwargs)
     state = sac.State(config["seed"])

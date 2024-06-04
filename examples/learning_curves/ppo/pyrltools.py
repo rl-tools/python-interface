@@ -16,14 +16,14 @@ def env_factory_factory(config, **kwargs):
         return env
     return env_factory
 
-def train_tinyrl(config, use_python_environment=True, verbose=False):
+def train_pyrltools(config, use_python_environment=True, verbose=False):
     custom_environment = {
         "path": os.path.abspath("../custom_environment"),
         "action_dim": 1,
         "observation_dim": 3,
     }
     env_factory = env_factory_factory(config)
-    from tinyrl import PPO
+    from pyrltools import PPO
     example_env = env_factory() 
     kwargs = {
         **default_config,
@@ -45,7 +45,7 @@ def train_tinyrl(config, use_python_environment=True, verbose=False):
     }
     interface_name = str(config["seed"])
     if use_python_environment:
-        ppo = PPO(env_factory, enable_evaluation=True, interface_name=interface_name, force_recompile=not "TINYRL_SKIP_FORCE_RECOMPILE" in os.environ, verbose=verbose, **kwargs)
+        ppo = PPO(env_factory, enable_evaluation=True, interface_name=interface_name, force_recompile=not "PYRLTOOLS_SKIP_FORCE_RECOMPILE" in os.environ, verbose=verbose, **kwargs)
     else:
         ppo = PPO(custom_environment, enable_evaluation=False, interface_name=interface_name, verbose=verbose, **kwargs)
     state = ppo.State(config["seed"])

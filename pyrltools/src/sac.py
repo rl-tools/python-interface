@@ -14,7 +14,7 @@ def SAC(env_factory, # can be either a lambda that creates a new Gym-like enviro
     enable_evaluation=True,
     evaluation_interval=1000,
     num_evaluation_episodes=10,
-    interface_name="default", # this is the namespace used for the compilation of the TinyRL interface (in a temporary directory) and should be unique if run in parallel. We don't choose a random uuid because it would invalidate the cache and require a re-compilation every time
+    interface_name="default", # this is the namespace used for the compilation of the PyRLtools interface (in a temporary directory) and should be unique if run in parallel. We don't choose a random uuid because it would invalidate the cache and require a re-compilation every time
     # Compile-time parameters:
     # Same set of parameters as: rl::algorithms::td3::DefaultParameters
     GAMMA = 0.99,
@@ -54,7 +54,7 @@ def SAC(env_factory, # can be either a lambda that creates a new Gym-like enviro
     OPTIMIZER_EPSILON_SQRT=1e-7,
     **kwargs
     ):
-    verbose = verbose or "TINYRL_VERBOSE" in os.environ
+    verbose = verbose or "PYRLTOOLS_VERBOSE" in os.environ
 
 
     # The action dim is needed to set the default target entropy
@@ -71,11 +71,11 @@ def SAC(env_factory, # can be either a lambda that creates a new Gym-like enviro
 
     compile_time_parameters = sanitize_values(locals())
 
-    module_name = f'tinyrl_sac_{interface_name}'
+    module_name = f'pyrltools_sac_{interface_name}'
 
     config_template = os.path.join(absolute_path, '../interface/algorithms/sac/template.h')
 
-    print('TinyRL Cache Path: ', CACHE_PATH, flush=True) if verbose else None
+    print('PyRLtools Cache Path: ', CACHE_PATH, flush=True) if verbose else None
     render_output_directory = os.path.join(CACHE_PATH, 'template', module_name)
     
     os.makedirs(render_output_directory, exist_ok=True)
@@ -85,6 +85,6 @@ def SAC(env_factory, # can be either a lambda that creates a new Gym-like enviro
         print('New SAC config detected, forcing recompilation...')
     
     loop_core_config_search_path_flag = compile_option("header_search_path", render_output_directory)
-    loop_core_config_flag = compile_option("macro_definition", "TINYRL_USE_LOOP_CORE_CONFIG")
+    loop_core_config_flag = compile_option("macro_definition", "PYRLTOOLS_USE_LOOP_CORE_CONFIG")
     flags = [loop_core_config_search_path_flag, loop_core_config_flag]
     return compile_training(module_name, env_factory, flags, verbose=verbose, force_recompile=(force_recompile or new_config), enable_evaluation=enable_evaluation, evaluation_interval=evaluation_interval, num_evaluation_episodes=num_evaluation_episodes, **kwargs)

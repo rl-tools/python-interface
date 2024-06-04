@@ -134,7 +134,7 @@ dependencies:
       - stable-baselines3==2.3.0
       - sympy==1.12
       - tbb==2021.12.0
-      - tinyrl==0.3.0
+      - pyrltools==0.3.0
       - torch==2.2.2
       - triton==2.2.0
       - typing-extensions==4.11.0
