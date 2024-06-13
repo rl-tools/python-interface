@@ -3,6 +3,11 @@
 #include <checkpoint.h>
 
 #include <rl_tools/nn/operations_generic.h>
+#include <rl_tools/nn/layers/dense/operations_generic.h>
+#include <rl_tools/nn/layers/standardize/operations_generic.h>
+#include <rl_tools/nn/layers/sample_and_squash/operations_generic.h>
+#include <rl_tools/nn_models/mlp_unconditional_stddev/operations_generic.h>
+#include <rl_tools/nn_models/mlp/operations_generic.h>
 #include <rl_tools/nn_models/sequential/operations_generic.h>
 
 #include <pybind11/pybind11.h>
@@ -16,7 +21,7 @@ namespace rlt = rl_tools;
 using DEVICE = rlt::devices::DEVICE_FACTORY<>;
 
 DEVICE device;
-using MODEL_TYPE = decltype(policy::model);
+using MODEL_TYPE = decltype(policy::module);
 using T = typename MODEL_TYPE::T;
 using TI = typename DEVICE::index_t;
 typename MODEL_TYPE::template Buffer<1> buffer;
@@ -47,7 +52,7 @@ pybind11::array_t<T> evaluate(const pybind11::array_t<T>& input){
     rlt::MatrixStatic<rlt::matrix::Specification<T, TI, 1, MODEL_TYPE::OUTPUT_DIM>> output_rlt;
     rlt::malloc(device, output_rlt);
     bool rng = false;
-    rlt::evaluate(device, policy::model, input_rlt, output_rlt, buffer, rng);
+    rlt::evaluate(device, policy::module, input_rlt, output_rlt, buffer, rng);
 
     std::vector<T> output(MODEL_TYPE::OUTPUT_DIM);
 

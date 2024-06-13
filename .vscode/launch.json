@@ -47,6 +47,8 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": "",
+                "RL_TOOLS_VERBOSE": "",
             }
         },
         {
