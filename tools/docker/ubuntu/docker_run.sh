@@ -1,1 +1,1 @@
-docker run -it --platform linux/amd64 --rm -v $(pwd)/../../../:/pyrltools:ro pyrltools:ubuntu bash /pyrltools/tools/docker/ubuntu/entrypoint.sh
+docker run -it --platform linux/amd64 --rm -v $(pwd)/../../../:/rltools:ro rltools:ubuntu bash /rltools/tools/docker/ubuntu/entrypoint.sh

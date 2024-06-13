@@ -3,7 +3,7 @@ import os, sys, subprocess
 from .. import CACHE_PATH
 
 from .compile import find_compiler
-force_mkl = "PYRLTOOLS_FORCE_MKL" in os.environ
+force_mkl = "RL_TOOLS_FORCE_MKL" in os.environ
 
 def link_blas(module):
     flags = []

@@ -1,3 +1,3 @@
 set -e
-pip install -e /pyrltools
-python3 /pyrltools/examples/pendulum_sac.py
+pip install -e /rltools
+python3 /rltools/examples/pendulum_sac.py

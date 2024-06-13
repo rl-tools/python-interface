@@ -1,1 +1,1 @@
-docker build -t pyrltools:conda . $@
+docker build -t rltools:conda . $@

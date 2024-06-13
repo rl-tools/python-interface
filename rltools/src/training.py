@@ -29,22 +29,22 @@ def compile_training(module_name, env_factory, flags, EPISODE_STEP_LIMIT=None, v
         EPISODE_STEP_LIMIT = get_time_limit(example_env) if EPISODE_STEP_LIMIT is None else EPISODE_STEP_LIMIT
     
     if EPISODE_STEP_LIMIT is not None:
-        flags += [compile_option("macro_definition", f'PYRLTOOLS_EPISODE_STEP_LIMIT={EPISODE_STEP_LIMIT}')]
+        flags += [compile_option("macro_definition", f'RL_TOOLS_EPISODE_STEP_LIMIT={EPISODE_STEP_LIMIT}')]
         
     custom_environment_header_search_path = None if use_python_environment else env_factory["path"]
     custom_environment_flag = compile_option("header_search_path", custom_environment_header_search_path)
-    use_python_environment_flag = compile_option("macro_definition", "PYRLTOOLS_USE_PYTHON_ENVIRONMENT") if use_python_environment else ''
-    observation_dim_flag = compile_option("macro_definition", f'PYRLTOOLS_OBSERVATION_DIM={example_env.observation_space.shape[0]}') if use_python_environment else ''
-    action_dim_flag = compile_option("macro_definition", f'PYRLTOOLS_ACTION_DIM={example_env.action_space.shape[0]}') if use_python_environment else ''
-    evaluation_flags = [compile_option("macro_definition", 'PYRLTOOLS_ENABLE_EVALUATION') if enable_evaluation else '']
-    evaluation_flags += [compile_option("macro_definition", f'PYRLTOOLS_EVALUATION_INTERVAL={evaluation_interval}') if evaluation_interval else '']
-    evaluation_flags += [compile_option("macro_definition", f'PYRLTOOLS_NUM_EVALUATION_EPISODES={num_evaluation_episodes}') if num_evaluation_episodes else '']
+    use_python_environment_flag = compile_option("macro_definition", "RL_TOOLS_USE_PYTHON_ENVIRONMENT") if use_python_environment else ''
+    observation_dim_flag = compile_option("macro_definition", f'RL_TOOLS_OBSERVATION_DIM={example_env.observation_space.shape[0]}') if use_python_environment else ''
+    action_dim_flag = compile_option("macro_definition", f'RL_TOOLS_ACTION_DIM={example_env.action_space.shape[0]}') if use_python_environment else ''
+    evaluation_flags = [compile_option("macro_definition", 'RL_TOOLS_ENABLE_EVALUATION') if enable_evaluation else '']
+    evaluation_flags += [compile_option("macro_definition", f'RL_TOOLS_EVALUATION_INTERVAL={evaluation_interval}') if evaluation_interval else '']
+    evaluation_flags += [compile_option("macro_definition", f'RL_TOOLS_NUM_EVALUATION_EPISODES={num_evaluation_episodes}') if num_evaluation_episodes else '']
     disable_tensorboard = compile_option("macro_definition", 'RLTOOLS_DISABLE_TENSORBOARD') if disable_tensorboard else ''
-    module_flag = compile_option("macro_definition", f'PYRLTOOLS_MODULE_NAME={module_name}')
+    module_flag = compile_option("macro_definition", f'RL_TOOLS_MODULE_NAME={module_name}')
     flags += [use_python_environment_flag, custom_environment_flag, observation_dim_flag, action_dim_flag, *evaluation_flags, module_flag]
     if enable_blas:
         flags += acceleration_flags(module_name)
-        flags += [compile_option("macro_definition", f'PYRLTOOLS_FORCE_BLAS={"true" if force_blas else "false"}') if force_blas else '']
+        flags += [compile_option("macro_definition", f'RL_TOOLS_FORCE_BLAS={"true" if force_blas else "false"}') if force_blas else '']
 
     source = os.path.join(absolute_path, '../interface/training/training.cpp')
     output_path = compile(source, module_name, flags, verbose=verbose, force_recompile=force_recompile) #, **compile_time_parameters)

@@ -1,1 +1,1 @@
-docker run -it --rm -v $(pwd)/../../../:/pyrltools:ro pyrltools:conda bash /pyrltools/tools/docker/conda/entrypoint.sh
+docker run -it --rm -v $(pwd)/../../../:/rltools:ro rltools:conda bash /rltools/tools/docker/conda/entrypoint.sh

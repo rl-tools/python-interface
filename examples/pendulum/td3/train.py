@@ -1,4 +1,4 @@
-from pyrltools import TD3
+from rltools import TD3
 import gymnasium as gym
 from gymnasium.experimental.wrappers import RescaleActionV0
 

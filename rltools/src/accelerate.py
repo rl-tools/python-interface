@@ -3,7 +3,7 @@ from .link_accelerate import link_accelerate
 from .link_mkl import link_mkl
 from .link_blas import link_blas
 
-disable_mkl = "PYRLTOOLS_DISABLE_MKL" in os.environ
+disable_mkl = "RL_TOOLS_DISABLE_MKL" in os.environ
 
 def acceleration_flags(module):
     flags = []

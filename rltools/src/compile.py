@@ -40,8 +40,8 @@ def is_valid_module_name(s):
 
 
 def find_compiler():
-    if "PYRLTOOLS_COMPILER" in os.environ:
-        return [os.environ["PYRLTOOLS_COMPILER"]]
+    if "RL_TOOLS_COMPILER" in os.environ:
+        return [os.environ["RL_TOOLS_COMPILER"]]
     unix_compilers = ["clang++", "g++"]
     windows_compilers = ["cl"]
     compilers = unix_compilers if (sys.platform in ["linux", "darwin"]) else windows_compilers
@@ -69,7 +69,7 @@ def find_compiler():
 def compile(source, module, flags=[], enable_optimization=True, force_recompile=False, verbose=False, **kwargs):
     '''
     Takes a link to a source file and compiles it into a shared object.
-    Caches the compilation in /tmp/pyrltools/interface/{module}/
+    Caches the compilation in /tmp/rltools/interface/{module}/
     Returns the path to the shared object.
     '''
     assert(is_valid_module_name(module))
@@ -82,7 +82,7 @@ def compile(source, module, flags=[], enable_optimization=True, force_recompile=
     lto_flag = '' #'-flto' if not sys.platform.startswith('win') else '/GL'
     pic_flag = '-fPIC' if not sys.platform.startswith('win') else '/LD'
     link_stdlib_flag = '-stdlib=libc++' if sys.platform == 'darwin' else ''
-    verbose_flag = compile_option("macro_definition", 'PYRLTOOLS_VERBOSE') if verbose or "PYRLTOOLS_VERBOSE" in os.environ else ''
+    verbose_flag = compile_option("macro_definition", 'RL_TOOLS_VERBOSE') if verbose or "RL_TOOLS_VERBOSE" in os.environ else ''
 
     pybind_includes = [compile_option("header_search_path", pybind11.get_include())]
     python_include_path = sysconfig.get_paths()['include']
@@ -137,10 +137,10 @@ def compile(source, module, flags=[], enable_optimization=True, force_recompile=
     if os.path.exists(cmd_path):
         with open(cmd_path, "r") as f:
             old_command_string = f.read()
-    if old_command_string is None or (not old_command_string in command_strings) or not os.path.exists(output_path) or force_recompile or "PYRLTOOLS_FORCE_RECOMPILE" in os.environ:
+    if old_command_string is None or (not old_command_string in command_strings) or not os.path.exists(output_path) or force_recompile or "RL_TOOLS_FORCE_RECOMPILE" in os.environ:
         for compiler, cmd, command_string in zip(compilers, cmds, command_strings):
             print(f"Compiling the RLtools interface...", flush=True)
-            verbose_actual = verbose or "PYRLTOOLS_FORCE_COMPILE_VERBOSE" in os.environ
+            verbose_actual = verbose or "RL_TOOLS_FORCE_COMPILE_VERBOSE" in os.environ
             run_kwargs = {"cwd": output_dir} if sys.platform.startswith('win') else {}
             run_kwargs = {**run_kwargs, **({} if verbose_actual else {"capture_output": True, "text": True})}
             subprocess.run(f"{compiler} --version", shell=True, check=True, **run_kwargs) if verbose_actual and sys.platform in ["linux", "darwin"] else None

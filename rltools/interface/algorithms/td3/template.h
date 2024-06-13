@@ -5,7 +5,7 @@
 #include <rl_tools/rl/loop/steps/evaluation/operations_generic.h>
 #include <rl_tools/rl/loop/steps/timing/operations_cpu.h>
 
-namespace PYRLTOOLS_MODULE_NAME{
+namespace RL_TOOLS_MODULE_NAME{
 
     namespace rlt = rl_tools;
 

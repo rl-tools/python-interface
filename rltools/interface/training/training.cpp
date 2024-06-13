@@ -1,14 +1,14 @@
-#ifndef PYRLTOOLS_MODULE_NAME
-#error "PYRLTOOLS_MODULE_NAME not defined"
+#ifndef RL_TOOLS_MODULE_NAME
+#error "RL_TOOLS_MODULE_NAME not defined"
 #endif
 
-#ifndef PYRLTOOLS_DTYPE
-#define PYRLTOOLS_DTYPE float
+#ifndef RL_TOOLS_DTYPE
+#define RL_TOOLS_DTYPE float
 #endif
 
 #include <rl_tools/operations/cpu_mux.h>
 
-#ifdef PYRLTOOLS_USE_PYTHON_ENVIRONMENT
+#ifdef RL_TOOLS_USE_PYTHON_ENVIRONMENT
 #include "../python_environment/operations_cpu.h"
 #else
 #include <environment.h>
@@ -41,35 +41,35 @@ namespace rlt = rl_tools;
 #include <pybind11/stl.h>
 
 
-namespace PYRLTOOLS_MODULE_NAME{
+namespace RL_TOOLS_MODULE_NAME{
     using DEVICE = rlt::devices::DEVICE_FACTORY<>;
-#ifdef PYRLTOOLS_FORCE_BLAS
+#ifdef RL_TOOLS_FORCE_BLAS
     static_assert(DEVICE::DEVICE_ID == rlt::devices::DeviceId::CPU_MKL || DEVICE::DEVICE_ID == rlt::devices::DeviceId::CPU_ACCELERATE || DEVICE::DEVICE_ID == rlt::devices::DeviceId::CPU_OPENBLAS);
 #endif
     using RNG = decltype(rlt::random::default_engine(typename DEVICE::SPEC::RANDOM{}));
     using TI = typename DEVICE::index_t;
 
-    using T = PYRLTOOLS_DTYPE;
+    using T = RL_TOOLS_DTYPE;
 
 
-    #ifdef PYRLTOOLS_USE_PYTHON_ENVIRONMENT
-    constexpr TI OBSERVATION_DIM = PYRLTOOLS_OBSERVATION_DIM;
-    constexpr TI ACTION_DIM = PYRLTOOLS_ACTION_DIM;
+    #ifdef RL_TOOLS_USE_PYTHON_ENVIRONMENT
+    constexpr TI OBSERVATION_DIM = RL_TOOLS_OBSERVATION_DIM;
+    constexpr TI ACTION_DIM = RL_TOOLS_ACTION_DIM;
     using ENVIRONMENT_SPEC = PythonEnvironmentSpecification<T, TI, OBSERVATION_DIM, ACTION_DIM>;
     using ENVIRONMENT = PythonEnvironment<ENVIRONMENT_SPEC>;
     #else
     using ENVIRONMENT = ENVIRONMENT_FACTORY<T, TI>;
     #endif
 
-    #ifdef PYRLTOOLS_EPISODE_STEP_LIMIT
-    constexpr TI EPISODE_STEP_LIMIT = PYRLTOOLS_EPISODE_STEP_LIMIT;
+    #ifdef RL_TOOLS_EPISODE_STEP_LIMIT
+    constexpr TI EPISODE_STEP_LIMIT = RL_TOOLS_EPISODE_STEP_LIMIT;
     #else
     constexpr TI EPISODE_STEP_LIMIT = ENVIRONMENT::EPISODE_STEP_LIMIT;
     #endif
 
 
 
-    // #ifdef PYRLTOOLS_USE_PPO
+    // #ifdef RL_TOOLS_USE_PPO
     // using LOOP_CORE_CONFIG = PPO_LOOP_CORE_CONFIG<T, TI, RNG, ENVIRONMENT, EPISODE_STEP_LIMIT>;
     // #else
     using LOOP_CORE_CONFIG = LOOP_CORE_CONFIG_FACTORY<T, TI, RNG, ENVIRONMENT, EPISODE_STEP_LIMIT>;
@@ -79,13 +79,13 @@ namespace PYRLTOOLS_MODULE_NAME{
 
     DEVICE device;
 
-    #ifdef PYRLTOOLS_ENABLE_EVALUATION
+    #ifdef RL_TOOLS_ENABLE_EVALUATION
     constexpr bool ENABLE_EVALUATION = true;
-    #ifndef PYRLTOOLS_EVALUATION_INTERVAL
-    #error "PYRLTOOLS_EVALUATION_INTERVAL not defined"
+    #ifndef RL_TOOLS_EVALUATION_INTERVAL
+    #error "RL_TOOLS_EVALUATION_INTERVAL not defined"
     #else
-    constexpr TI PARAMETER_EVALUATION_INTERVAL = PYRLTOOLS_EVALUATION_INTERVAL;
-    constexpr TI PARAMETER_NUM_EVALUATION_EPISODES = PYRLTOOLS_NUM_EVALUATION_EPISODES;
+    constexpr TI PARAMETER_EVALUATION_INTERVAL = RL_TOOLS_EVALUATION_INTERVAL;
+    constexpr TI PARAMETER_NUM_EVALUATION_EPISODES = RL_TOOLS_NUM_EVALUATION_EPISODES;
 
     template <typename NEXT>
     struct LOOP_EVAL_PARAMETERS: rlt::rl::loop::steps::evaluation::Parameters<T, TI, NEXT>{
@@ -103,7 +103,7 @@ namespace PYRLTOOLS_MODULE_NAME{
     using LOOP_CONFIG = LOOP_TIMING_CONFIG;
     using LOOP_STATE = typename LOOP_CONFIG::template State<LOOP_CONFIG>;
 
-    #ifdef PYRLTOOLS_USE_PYTHON_ENVIRONMENT
+    #ifdef RL_TOOLS_USE_PYTHON_ENVIRONMENT
     void set_environment_factory(std::function<pybind11::object()> p_environment_factory){
         environment_factory = p_environment_factory;
         auto python_atexit = pybind11::module_::import("atexit");
@@ -164,14 +164,14 @@ namespace PYRLTOOLS_MODULE_NAME{
 
 
 
-PYBIND11_MODULE(PYRLTOOLS_MODULE_NAME, m){
+PYBIND11_MODULE(RL_TOOLS_MODULE_NAME, m){
     m.doc() = "PyRLtools Training Loop";
-    pybind11::class_<PYRLTOOLS_MODULE_NAME::State>(m, "State")
-            .def(pybind11::init<PYRLTOOLS_MODULE_NAME::TI>())
-            .def("step", &PYRLTOOLS_MODULE_NAME::State::step, "Step the loop")
-            .def("action", &PYRLTOOLS_MODULE_NAME::State::action, "Get the action for the given observation")
-            .def("export_policy", &PYRLTOOLS_MODULE_NAME::State::export_policy, "Export the policy to a python file");
-#ifdef PYRLTOOLS_USE_PYTHON_ENVIRONMENT
-    m.def("set_environment_factory", &PYRLTOOLS_MODULE_NAME::set_environment_factory, "Set the environment factory");
+    pybind11::class_<RL_TOOLS_MODULE_NAME::State>(m, "State")
+            .def(pybind11::init<RL_TOOLS_MODULE_NAME::TI>())
+            .def("step", &RL_TOOLS_MODULE_NAME::State::step, "Step the loop")
+            .def("action", &RL_TOOLS_MODULE_NAME::State::action, "Get the action for the given observation")
+            .def("export_policy", &RL_TOOLS_MODULE_NAME::State::export_policy, "Export the policy to a python file");
+#ifdef RL_TOOLS_USE_PYTHON_ENVIRONMENT
+    m.def("set_environment_factory", &RL_TOOLS_MODULE_NAME::set_environment_factory, "Set the environment factory");
 #endif
 }

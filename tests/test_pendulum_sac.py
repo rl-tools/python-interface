@@ -1,4 +1,4 @@
-from pyrltools import SAC
+from rltools import SAC
 import gymnasium as gym
 from gymnasium.experimental.wrappers import RescaleActionV0
 

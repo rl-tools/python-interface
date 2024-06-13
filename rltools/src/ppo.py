@@ -60,13 +60,13 @@ def PPO(env_factory, # can be either a lambda that creates a new Gym-like enviro
     ):
     assert STEP_LIMIT is not None or TOTAL_STEP_LIMIT is not None, "Either STEP_LIMIT or TOTAL_STEP_LIMIT must be set"
     evaluation_interval = evaluation_interval if evaluation_interval is not None else 10
-    verbose = verbose or "PYRLTOOLS_VERBOSE" in os.environ
+    verbose = verbose or "RL_TOOLS_VERBOSE" in os.environ
     if STEP_LIMIT is None:
         STEP_LIMIT = math.floor(TOTAL_STEP_LIMIT/(ON_POLICY_RUNNER_STEPS_PER_ENV * N_ENVIRONMENTS))
 
     compile_time_parameters = sanitize_values({k:v for k, v in locals().items() if k in inspect.signature(PPO).parameters.keys()})
 
-    module_name = f'pyrltools_ppo_{interface_name}'
+    module_name = f'rltools_ppo_{interface_name}'
 
     config_template = os.path.join(absolute_path, '../interface/algorithms/ppo/template.h')
 
@@ -80,6 +80,6 @@ def PPO(env_factory, # can be either a lambda that creates a new Gym-like enviro
         print('New PPO config detected, forcing recompilation...')
     
     loop_core_config_search_path_flag = compile_option("header_search_path", render_output_directory)
-    loop_core_config_flag = compile_option("macro_definition", "PYRLTOOLS_USE_LOOP_CORE_CONFIG")
+    loop_core_config_flag = compile_option("macro_definition", "RL_TOOLS_USE_LOOP_CORE_CONFIG")
     flags = [loop_core_config_search_path_flag, loop_core_config_flag]
     return compile_training(module_name, env_factory, flags, verbose=verbose, force_recompile=(force_recompile or new_config), enable_evaluation=enable_evaluation, evaluation_interval=evaluation_interval, num_evaluation_episodes=num_evaluation_episodes, **kwargs)

@@ -24,7 +24,7 @@ jobs:
 
     - name: Checkout External Submodules
       run: |
-        git submodule update --init -- pyrltools/external/rl_tools
+        git submodule update --init -- rltools/external/rl_tools
 
     - name: Update pip
       run: |
@@ -45,15 +45,15 @@ jobs:
     - name: Test with pytest
       if: matrix.mkl == 'no'
       env:
-        PYRLTOOLS_FORCE_RECOMPILE: ""
-        PYRLTOOLS_FORCE_COMPILE_VERBOSE: ""
-        PYRLTOOLS_DISABLE_PYTORCH_IMPORT_TEST: ""
+        RL_TOOLS_FORCE_RECOMPILE: ""
+        RL_TOOLS_FORCE_COMPILE_VERBOSE: ""
+        RL_TOOLS_DISABLE_PYTORCH_IMPORT_TEST: ""
       run: |
         pytest tests -s
     - name: Test with pytest (force MKL)
       if: matrix.mkl == 'yes'
       env: 
-        PYRLTOOLS_FORCE_MKL: 1
-        PYRLTOOLS_DISABLE_PYTORCH_IMPORT_TEST: ""
+        RL_TOOLS_FORCE_MKL: 1
+        RL_TOOLS_DISABLE_PYTORCH_IMPORT_TEST: ""
       run: |
         pytest tests -s

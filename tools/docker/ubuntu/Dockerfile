@@ -1,5 +1,5 @@
 FROM ubuntu:latest
-ARG PYRLTOOLS_USE_CLANG=false
+ARG RL_TOOLS_USE_CLANG=false
 
 ENV DEBIAN_FRONTEND=noninteractive
 
@@ -7,7 +7,7 @@ RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip 
 
-RUN if [ "$PYRLTOOLS_USE_CLANG" = "true" ]; then \
+RUN if [ "$RL_TOOLS_USE_CLANG" = "true" ]; then \
         sudo apt-get update && sudo apt-get install -y clang; \
     fi
 

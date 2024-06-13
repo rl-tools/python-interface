@@ -1,4 +1,4 @@
-from pyrltools import SAC
+from rltools import SAC
 import os 
 
 seed = 0xf00d

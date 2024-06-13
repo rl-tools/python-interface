@@ -1,5 +1,5 @@
 import os
-from pyrltools import PPO, color
+from rltools import PPO, color
 import gymnasium as gym
 from gymnasium.experimental.wrappers import RescaleActionV0
 

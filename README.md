@@ -7,12 +7,12 @@ This wrapper is work in progress and for now just exposes the SAC training loop 
 
 ### Installation:
 ```
-pip install pyrltools gymnasium
+pip install rltools gymnasium
 ```
 
 ### Example:
 ```
-from pyrltools import SAC
+from rltools import SAC
 import gymnasium as gym
 from gymnasium.experimental.wrappers import RescaleActionV0
 
@@ -57,7 +57,7 @@ while True:
 with open("pendulum_sac_checkpoint.h", "w") as f:
     f.write(state.export_policy())
 # Load
-from pyrltools import load_checkpoint_from_path
+from rltools import load_checkpoint_from_path
 policy = load_checkpoint_from_path("pendulum_sac_checkpoint.h")
 action = policy.evaluate(observation) # Note that e.g. SAC's policies output mean and std (concatenated)
 ```
@@ -69,7 +69,7 @@ To get the maximum performance you should rewrite your environment in C++. Don't
 
 On macOS PyRLtools automatically uses Accelerate. To use MKL on linux you can install PyRLtools with the `mkl` option:
 ```
-pip install pyrltools[mkl]
+pip install rltools[mkl]
 ```
 
 # Windows

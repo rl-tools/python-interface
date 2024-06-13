@@ -54,7 +54,7 @@ namespace rl_tools{
             T current_high = high.at(action_i);
 //             env.action_space_offset[action_i] = (current_high + current_low)/2;
 //             env.action_space_range[action_i] = (current_high - current_low)/2;
-// #ifdef PYRLTOOLS_VERBOSE
+// #ifdef RL_TOOLS_VERBOSE
 //             std::cout << "Action dim: " << action_i << " low: " << current_low << " high: " << current_high << std::endl;
 // #endif
             if(math::abs(device.math, current_low - (-1.0)) > 1e-6 || math::abs(device.math, current_high - 1.0) > 1e-6){

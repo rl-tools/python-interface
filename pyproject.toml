@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "pyrltools"
+name = "rltools"
 version = "0.4.5"
 authors = [
   { name="Jonas Eschmann", email="jonas.eschmann@gmail.com" },
@@ -41,12 +41,12 @@ learning-curves = [
 
 [tool.hatch.build]
 include = [
-  "pyrltools/__init__.py",
-  "pyrltools/interface/**",
-  "pyrltools/src/**",
-  "pyrltools/external/rl_tools/include/**"
+  "rltools/__init__.py",
+  "rltools/interface/**",
+  "rltools/src/**",
+  "rltools/external/rl_tools/include/**"
 ]
 
 [project.urls]
-Homepage = "https://github.com/rl-tools/pyrltools"
-Issues = "https://github.com/rl-tools/pyrltools/issues"
+Homepage = "https://github.com/rl-tools/rltools"
+Issues = "https://github.com/rl-tools/rltools/issues"

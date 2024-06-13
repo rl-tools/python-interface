@@ -9,7 +9,7 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                // "PYRLTOOLS_COMPILER": "g++"
+                // "RL_TOOLS_COMPILER": "g++"
             }
         },
         {
@@ -20,9 +20,9 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYRLTOOLS_FORCE_RECOMPILE": "",
-                "PYRLTOOLS_FORCE_COMPILE_VERBOSE": "",
-                "PYRLTOOLS_VERBOSE": ""
+                "RL_TOOLS_FORCE_RECOMPILE": "",
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": "",
+                "RL_TOOLS_VERBOSE": ""
             }
         },
         {
@@ -33,10 +33,10 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYRLTOOLS_FORCE_RECOMPILE": "",
-                "PYRLTOOLS_FORCE_COMPILE_VERBOSE": "",
-                "PYRLTOOLS_VERBOSE": "",
-                "PYRLTOOLS_FORCE_MKL": ""
+                "RL_TOOLS_FORCE_RECOMPILE": "",
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": "",
+                "RL_TOOLS_VERBOSE": "",
+                "RL_TOOLS_FORCE_MKL": ""
             }
         },
         {
@@ -67,7 +67,7 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                // "PYRLTOOLS_COMPILER": "g++"
+                // "RL_TOOLS_COMPILER": "g++"
             }
         },
         {
@@ -78,9 +78,9 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYRLTOOLS_FORCE_RECOMPILE": "",
-                "PYRLTOOLS_FORCE_COMPILE_VERBOSE": "",
-                "PYRLTOOLS_VERBOSE": ""
+                "RL_TOOLS_FORCE_RECOMPILE": "",
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": "",
+                "RL_TOOLS_VERBOSE": ""
             }
         },
         {
@@ -91,10 +91,10 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYRLTOOLS_FORCE_RECOMPILE": "",
-                "PYRLTOOLS_FORCE_COMPILE_VERBOSE": "",
-                "PYRLTOOLS_VERBOSE": "",
-                "PYRLTOOLS_FORCE_MKL": ""
+                "RL_TOOLS_FORCE_RECOMPILE": "",
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": "",
+                "RL_TOOLS_VERBOSE": "",
+                "RL_TOOLS_FORCE_MKL": ""
             }
         },
         {
@@ -115,7 +115,7 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                // "PYRLTOOLS_COMPILER": "g++"
+                // "RL_TOOLS_COMPILER": "g++"
             }
         },
         {
@@ -126,9 +126,9 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYRLTOOLS_FORCE_RECOMPILE": "",
-                "PYRLTOOLS_FORCE_COMPILE_VERBOSE": "",
-                "PYRLTOOLS_VERBOSE": ""
+                "RL_TOOLS_FORCE_RECOMPILE": "",
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": "",
+                "RL_TOOLS_VERBOSE": ""
             }
         },
         {
@@ -139,10 +139,10 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYRLTOOLS_FORCE_RECOMPILE": "",
-                "PYRLTOOLS_FORCE_COMPILE_VERBOSE": "",
-                "PYRLTOOLS_VERBOSE": "",
-                "PYRLTOOLS_FORCE_MKL": ""
+                "RL_TOOLS_FORCE_RECOMPILE": "",
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": "",
+                "RL_TOOLS_VERBOSE": "",
+                "RL_TOOLS_FORCE_MKL": ""
             }
         },
         {
@@ -153,10 +153,10 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYRLTOOLS_FORCE_RECOMPILE": "",
-                "PYRLTOOLS_FORCE_COMPILE_VERBOSE": "",
-                "PYRLTOOLS_VERBOSE": "",
-                "PYRLTOOLS_DISABLE_MKL": ""
+                "RL_TOOLS_FORCE_RECOMPILE": "",
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": "",
+                "RL_TOOLS_VERBOSE": "",
+                "RL_TOOLS_DISABLE_MKL": ""
             }
         },
         {
@@ -177,8 +177,8 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYRLTOOLS_FORCE_RECOMPILE": "",
-                "PYRLTOOLS_FORCE_COMPILE_VERBOSE": ""
+                "RL_TOOLS_FORCE_RECOMPILE": "",
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": ""
             }
         },
         {
@@ -189,9 +189,9 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "env": {
-                "PYRLTOOLS_FORCE_RECOMPILE": "",
-                "PYRLTOOLS_FORCE_COMPILE_VERBOSE": "",
-                "PYRLTOOLS_FORCE_MKL": ""
+                "RL_TOOLS_FORCE_RECOMPILE": "",
+                "RL_TOOLS_FORCE_COMPILE_VERBOSE": "",
+                "RL_TOOLS_FORCE_MKL": ""
             }
         },
         {
@@ -400,7 +400,7 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                "--input-dir", "~/hpc_mount/pyrltools/results",
+                "--input-dir", "~/hpc_mount/rltools/results",
                 "--output-dir", "figures",
             ]
         },
@@ -412,7 +412,7 @@
             "console": "integratedTerminal",
             "justMyCode": false,
             "args": [
-                "--input-dir", "~/hpc_mount/pyrltools/results/2024-04-17_19-18-11",
+                "--input-dir", "~/hpc_mount/rltools/results/2024-04-17_19-18-11",
                 "--output-dir", "figures",
             ]
         },

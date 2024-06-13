@@ -1,1 +1,1 @@
-g++ -std=c++17 -I../pyrltools/external/rl_tools/include ../pyrltools/interface/inference/inference.cpp
+g++ -std=c++17 -I../rltools/external/rl_tools/include ../rltools/interface/inference/inference.cpp

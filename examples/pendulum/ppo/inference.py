@@ -1,6 +1,6 @@
 import gymnasium as gym
 from gymnasium.experimental.wrappers import RescaleActionV0
-from pyrltools import load_checkpoint_from_path
+from rltools import load_checkpoint_from_path
 import math
 
 policy = load_checkpoint_from_path("pendulum_td3_checkpoint.h")

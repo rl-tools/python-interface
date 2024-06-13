@@ -1,4 +1,4 @@
-from pyrltools import SAC
+from rltools import SAC
 import os, time
 
 def test_custom_environment():
@@ -20,7 +20,7 @@ def test_custom_environment():
         finished = state.step()
     end = time.time()
     print(f"Training time: {end - start}")
-    if "PYRLTOOLS_FORCE_MKL" in os.environ:
+    if "RL_TOOLS_FORCE_MKL" in os.environ:
         assert(end - start < 10.0)
 
     # Inference
