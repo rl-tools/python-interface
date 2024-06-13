@@ -78,4 +78,4 @@ The RLtools Python interface also works on Windows but MKL is not integrated, ye
 
 
 # Acknowledgements
-Thanks a lot to @omtinez for letting us use the PyPI `rltools` handle! The PyPI `rltools` handle originally contained the `v0.1.0`, `v0.2.0`, and `v0.2.1` releases of [omtinez/rltools](https://github.com/omtinez/rltools). Please refer to the source repository [omtinez/rltools](https://github.com/omtinez/rltools) if you were looking for the original releases.
+Thanks a lot to [@omtinez](https://github.com/omtinez) for letting us use the PyPI `rltools` handle! The PyPI `rltools` handle originally contained the `v0.1.0`, `v0.2.0`, and `v0.2.1` releases of [omtinez/rltools](https://github.com/omtinez/rltools). Please refer to the source repository [omtinez/rltools](https://github.com/omtinez/rltools) if you were looking for the original releases.
