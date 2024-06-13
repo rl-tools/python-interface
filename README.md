@@ -7,7 +7,7 @@ This wrapper is work in progress and for now just exposes the SAC training loop 
 
 ### Installation:
 ```
-pip install rltools gymnasium[classic-control]
+pip install rltools gymnasium
 ```
 
 ### Example:
