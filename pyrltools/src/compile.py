@@ -143,6 +143,7 @@ def compile(source, module, flags=[], enable_optimization=True, force_recompile=
             verbose_actual = verbose or "PYRLTOOLS_FORCE_COMPILE_VERBOSE" in os.environ
             run_kwargs = {"cwd": output_dir} if sys.platform.startswith('win') else {}
             run_kwargs = {**run_kwargs, **({} if verbose_actual else {"capture_output": True, "text": True})}
+            subprocess.run(f"{compiler} --version", shell=True, check=True, **run_kwargs) if verbose_actual and sys.platform in ["linux", "darwin"] else None
             print(f"Command: {command_string}", flush=True) if verbose_actual else None
             result = subprocess.run(command_string, check=False, shell=True, **run_kwargs)
             if result.returncode != 0:

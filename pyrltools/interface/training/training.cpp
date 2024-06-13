@@ -7,7 +7,6 @@
 #endif
 
 #include <rl_tools/operations/cpu_mux.h>
-#include <rl_tools/nn/operations_cpu_mux.h>
 
 #ifdef PYRLTOOLS_USE_PYTHON_ENVIRONMENT
 #include "../python_environment/operations_cpu.h"
@@ -16,15 +15,21 @@
 #endif
 
 #include <rl_tools/nn/optimizers/adam/instance/operations_generic.h>
-#include <rl_tools/nn_models/sequential/operations_generic.h>
-#include <rl_tools/nn/optimizers/adam/instance/persist_code.h>
-#include <rl_tools/nn/layers/dense/persist_code.h>
-#include <rl_tools/nn/parameters/persist_code.h>
-#include <rl_tools/nn_models/sequential/persist_code.h>
+#include <rl_tools/nn/operations_cpu_mux.h>
+#include <rl_tools/nn/layers/sample_and_squash/operations_generic.h>
+#include <rl_tools/nn/layers/standardize/operations_generic.h>
 #include <rl_tools/nn_models/mlp_unconditional_stddev/operations_generic.h>
-#include <rl_tools/nn_models/mlp/persist_code.h>
-// #include <rl_tools/nn_models/mlp/persist_code.h>
+#include <rl_tools/nn_models/mlp/operations_generic.h>
+#include <rl_tools/nn_models/sequential/operations_generic.h>
 #include <rl_tools/nn/optimizers/adam/operations_generic.h>
+
+#include <rl_tools/nn/optimizers/adam/instance/persist_code.h>
+#include <rl_tools/nn/parameters/persist_code.h>
+#include <rl_tools/nn/layers/sample_and_squash/persist_code.h>
+#include <rl_tools/nn/layers/standardize/persist_code.h>
+#include <rl_tools/nn/layers/dense/persist_code.h>
+#include <rl_tools/nn_models/mlp/persist_code.h>
+#include <rl_tools/nn_models/sequential/persist_code.h>
 
 #include "loop_core_config.h"
 

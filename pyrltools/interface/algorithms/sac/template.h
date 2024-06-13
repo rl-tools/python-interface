@@ -14,7 +14,6 @@ namespace PYRLTOOLS_MODULE_NAME{
     struct SAC_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::sac::loop::core::DefaultParameters<T, TI, ENVIRONMENT>{
         struct SAC_PARAMETERS{
             static constexpr T GAMMA = $GAMMA;
-            static constexpr T ALPHA = $ALPHA;
             static constexpr TI ACTOR_BATCH_SIZE = $ACTOR_BATCH_SIZE;
             static constexpr TI CRITIC_BATCH_SIZE = $CRITIC_BATCH_SIZE;
             static constexpr TI N_WARMUP_STEPS_CRITIC = 0;
@@ -25,10 +24,6 @@ namespace PYRLTOOLS_MODULE_NAME{
             static constexpr T ACTOR_POLYAK = $ACTOR_POLYAK;
             static constexpr T CRITIC_POLYAK = $CRITIC_POLYAK;
             static constexpr bool IGNORE_TERMINATION = $IGNORE_TERMINATION; 
-            static constexpr T TARGET_ENTROPY = $TARGET_ENTROPY;
-            static constexpr bool ADAPTIVE_ALPHA = $ADAPTIVE_ALPHA;
-            static constexpr T ACTION_LOG_STD_LOWER_BOUND = $ACTION_LOG_STD_LOWER_BOUND;
-            static constexpr T ACTION_LOG_STD_UPPER_BOUND = $ACTION_LOG_STD_UPPER_BOUND;
         };
         static constexpr TI N_ENVIRONMENTS = $N_ENVIRONMENTS;
         static constexpr TI N_WARMUP_STEPS = $N_WARMUP_STEPS;
@@ -44,6 +39,13 @@ namespace PYRLTOOLS_MODULE_NAME{
         static constexpr bool COLLECT_EPISODE_STATS = $COLLECT_EPISODE_STATS;
         static constexpr TI EPISODE_STATS_BUFFER_SIZE = $EPISODE_STATS_BUFFER_SIZE;
         static constexpr bool SHARED_BATCH = $SHARED_BATCH;
+        static constexpr T TARGET_ENTROPY = $TARGET_ENTROPY;
+        static constexpr T ALPHA = $ALPHA;
+        static constexpr bool ADAPTIVE_ALPHA = $ADAPTIVE_ALPHA;
+        static constexpr T LOG_STD_LOWER_BOUND = $LOG_STD_LOWER_BOUND;
+        static constexpr T LOG_STD_UPPER_BOUND = $LOG_STD_UPPER_BOUND;
+        static constexpr T LOG_PROBABILITY_EPSILON = $LOG_PROBABILITY_EPSILON;
+
         struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<T>{
             static constexpr T ALPHA = $OPTIMIZER_ALPHA;
             static constexpr T BETA_1 = $OPTIMIZER_BETA_1;
@@ -51,6 +53,8 @@ namespace PYRLTOOLS_MODULE_NAME{
             static constexpr T EPSILON = $OPTIMIZER_EPSILON;
             static constexpr T EPSILON_SQRT = $OPTIMIZER_EPSILON_SQRT;
         };
+
+
     };
 
     template <typename T, typename TI, typename RNG, typename ENVIRONMENT, TI T_EPISODE_STEP_LIMIT>

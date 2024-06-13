@@ -18,7 +18,6 @@ def SAC(env_factory, # can be either a lambda that creates a new Gym-like enviro
     # Compile-time parameters:
     # Same set of parameters as: rl::algorithms::td3::DefaultParameters
     GAMMA = 0.99,
-    ALPHA = 0.5,
     ACTOR_BATCH_SIZE = 100, #32,
     CRITIC_BATCH_SIZE = 100, #32,
     CRITIC_TRAINING_INTERVAL = 1,
@@ -27,10 +26,6 @@ def SAC(env_factory, # can be either a lambda that creates a new Gym-like enviro
     ACTOR_POLYAK = 1.0 - 0.005,
     CRITIC_POLYAK = 1.0 - 0.005,
     IGNORE_TERMINATION = False,
-    TARGET_ENTROPY = None,
-    ADAPTIVE_ALPHA = True,
-    ACTION_LOG_STD_LOWER_BOUND=-20,
-    ACTION_LOG_STD_UPPER_BOUND=2,
     # Same set of parameters as rl::algorithms::sac::loop::core::DefaultParameters
     N_ENVIRONMENTS = 1,
     N_WARMUP_STEPS = None,
@@ -46,6 +41,12 @@ def SAC(env_factory, # can be either a lambda that creates a new Gym-like enviro
     COLLECT_EPISODE_STATS = True,
     EPISODE_STATS_BUFFER_SIZE = 1000,
     SHARED_BATCH = True,
+    TARGET_ENTROPY = None,
+    ALPHA = 0.5,
+    ADAPTIVE_ALPHA = True,
+    LOG_STD_LOWER_BOUND=-20,
+    LOG_STD_UPPER_BOUND=2,
+    LOG_PROBABILITY_EPSILON=1e-6,
     # optimizer
     OPTIMIZER_ALPHA=1e-3,
     OPTIMIZER_BETA_1=0.9,
