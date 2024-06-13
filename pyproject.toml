@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "rltools"
-version = "0.4.7"
+version = "0.4.8"
 authors = [
   { name="Jonas Eschmann", email="jonas.eschmann@gmail.com" },
 ]
