@@ -1,4 +1,4 @@
-name: Test PyRLtools using conda
+name: Test the RLtools Python Interface Using Conda
 
 on: [push]
 

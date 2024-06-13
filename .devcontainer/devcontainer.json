@@ -1,5 +1,5 @@
 {
-    "name": "PyRLtools Ubuntu Development",
+    "name": "RLtools Ubuntu Development",
     "image": "rltools:ubuntu",
     "runArgs": [
         "--platform=linux/amd64",

@@ -165,7 +165,7 @@ namespace RL_TOOLS_MODULE_NAME{
 
 
 PYBIND11_MODULE(RL_TOOLS_MODULE_NAME, m){
-    m.doc() = "PyRLtools Training Loop";
+    m.doc() = "RLtools Training Loop";
     pybind11::class_<RL_TOOLS_MODULE_NAME::State>(m, "State")
             .def(pybind11::init<RL_TOOLS_MODULE_NAME::TI>())
             .def("step", &RL_TOOLS_MODULE_NAME::State::step, "Step the loop")

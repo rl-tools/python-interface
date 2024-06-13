@@ -62,6 +62,6 @@ pybind11::array_t<T> evaluate(const pybind11::array_t<T>& input){
 }
 
 PYBIND11_MODULE(RL_TOOLS_MODULE_NAME, m){
-    m.doc() = "PyRLtools Inference";
+    m.doc() = "RLtools Inference";
     m.def("evaluate", &evaluate, "Evaluate the NN");
 }

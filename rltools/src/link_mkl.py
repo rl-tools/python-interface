@@ -6,7 +6,7 @@ def link_mkl():
     mkl_found = False
     if sys.platform == "linux":
         if "torch" in sys.modules:
-            warning = "PyTorch is imported which is known to cause issues when loading PyRLtools with MKL. Set environment variable RL_TOOLS_DISABLE_MKL to disable MKL or disable this warning by RL_TOOLS_IGNORE_TORCH_WARNING."
+            warning = "PyTorch is imported which is known to cause issues when loading the RLtools Python interface with MKL. Set environment variable RL_TOOLS_DISABLE_MKL to disable MKL or disable this warning by RL_TOOLS_IGNORE_TORCH_WARNING."
             if "RL_TOOLS_IGNORE_TORCH_WARNING" not in os.environ:
                 raise RuntimeError(warning)
             else:

@@ -249,7 +249,7 @@ if __name__ == "__main__":
     if config["algorithm"] == "SAC":
         print("Using SAC", flush=True)
         if config["library"] == "rltools":
-            print("Using PyRLtools", flush=True)
+            print("Using RLtools", flush=True)
             returns = sac.train_rltools(config)
         elif config["library"] == "sb3":
             print("Using Stable-Baselines3")
@@ -265,7 +265,7 @@ if __name__ == "__main__":
     elif config["algorithm"] == "PPO":
         print("Using PPO", flush=True)
         if config["library"] == "rltools":
-            print(f"Using PyRLtools PPO (Cache path: {CACHE_PATH})")
+            print(f"Using RLtools PPO (Cache path: {CACHE_PATH})")
             returns = ppo.train_rltools(config, verbose=args.verbose)
         elif config["library"] == "sb3":
             print("Using Stable-Baselines3")
@@ -284,7 +284,7 @@ if __name__ == "__main__":
     elif config["algorithm"] == "TD3":
         print("Using TD3", flush=True)
         if config["library"] == "rltools":
-            print("Using PyRLtools", flush=True)
+            print("Using RLtools", flush=True)
             returns = td3.train_rltools(config)
         elif config["library"] == "sb3":
             print("Using Stable-Baselines3")

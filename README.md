@@ -1,4 +1,4 @@
-# PyRLtools
+# RLtools Python Interface
 [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/rl-tools/py-rl-tools/blob/master/examples/notebooks/train.ipynb)
 
 A Python wrapper for RLtools ([https://rl.tools](https://rl.tools)). PyTorch is only used for its [utils that allow convenient wrapping of C++ code](https://pytorch.org/docs/stable/cpp_extension.html) to compile RLtools. The RLtools training code needs to be compiled at runtime because properties like the observation and action dimensions are not known at compile time. One of the fundamental principles of RLtools is that the sizes of all data structures and loops are known at compile-time so that the compiler can maximally reason about the code and heavily optimize it. Hence this wrapper takes an environment ([Gymnasium](https://github.com/Farama-Foundation/Gymnasium) interface) factory function as an input to infer the observation and action shapes and compile a bridge environment that is compatible with RLtools. 
@@ -7,7 +7,7 @@ This wrapper is work in progress and for now just exposes the SAC training loop 
 
 ### Installation:
 ```
-pip install rltools gymnasium
+pip install rltools gymnasium[classic-control]
 ```
 
 ### Example:
@@ -67,11 +67,11 @@ To get the maximum performance you should rewrite your environment in C++. Don't
 
 # Acceleration
 
-On macOS PyRLtools automatically uses Accelerate. To use MKL on linux you can install PyRLtools with the `mkl` option:
+On macOS the RLtools Python interface automatically uses Accelerate. To use MKL on linux you can install RLtools with the `mkl` option:
 ```
 pip install rltools[mkl]
 ```
 
 # Windows
 
-PyRLtools also works on Windows but MKL is not integrated, yet. Please make sure to install Python from the installer from the Python website and not using the Windows Store Python version. The latter resides in a directory that requires admin privileges even for read access. Due to the just-in-time compilation of RLtools we need to be able to read the Python header and library files. After installing the right Python version the easies way to run PyRLtools is by opening the cloned folder in Visual Studio Code and launching the preconfigured targets. Make sure to start Visual Studio Code from the Visual Studio Prompt (e.g. `Developer Command Prompt for VS 2022`) by running `code` so that `cl.exe` (MSVC) is available in the environment. 
+The RLtools Python interface also works on Windows but MKL is not integrated, yet. Please make sure to install Python from the installer from the Python website and not using the Windows Store Python version. The latter resides in a directory that requires admin privileges even for read access. Due to the just-in-time compilation of RLtools we need to be able to read the Python header and library files. After installing the right Python version the easies way to run RLtools is by opening the cloned folder in Visual Studio Code and launching the preconfigured targets. Make sure to start Visual Studio Code from the Visual Studio Prompt (e.g. `Developer Command Prompt for VS 2022`) by running `code` so that `cl.exe` (MSVC) is available in the environment. 

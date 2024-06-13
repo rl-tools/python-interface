@@ -70,7 +70,7 @@ def PPO(env_factory, # can be either a lambda that creates a new Gym-like enviro
 
     config_template = os.path.join(absolute_path, '../interface/algorithms/ppo/template.h')
 
-    print('PyRLtools Cache Path: ', CACHE_PATH) if verbose else None
+    print('RLtools Cache Path: ', CACHE_PATH) if verbose else None
     render_output_directory = os.path.join(CACHE_PATH, 'template', module_name)
     
     os.makedirs(render_output_directory, exist_ok=True)

@@ -1,4 +1,4 @@
-name: Test PyRLtools using pip
+name: Test the RLtools Python Interface Using PIP
 
 on: [push]
 
