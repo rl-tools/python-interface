@@ -39,7 +39,7 @@ namespace policy{
         using MODEL = $MODEL_TYPE;
     }
     using MODEL = model_definition::MODEL;
-    const MODEL model = $MODEL_INSTANCE;
+    const MODEL module = $MODEL_INSTANCE;
 }
 """)
 
