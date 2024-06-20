@@ -63,9 +63,13 @@ namespace rl_tools{
         }
     }
     template<typename DEVICE, typename SPEC>
-    static void init(DEVICE& device, PythonEnvironment<SPEC>& env){}
+    static void init(DEVICE& device, PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters){}
     template<typename DEVICE, typename SPEC>
-    static void initial_state(DEVICE& device, const PythonEnvironment<SPEC>& env, typename PythonEnvironment<SPEC>::State& state){
+    static void initial_parameters(DEVICE& device, const PythonEnvironment<SPEC>& env, typename PythonEnvironment<SPEC>::Parameters& parameters){}
+    template<typename DEVICE, typename SPEC, typename RNG>
+    static void sample_initial_parameters(DEVICE& device, const PythonEnvironment<SPEC>& env, typename PythonEnvironment<SPEC>::Parameters& parameters, RNG& rng){}
+    template<typename DEVICE, typename SPEC>
+    static void initial_state(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters, typename PythonEnvironment<SPEC>::State& state){
         using T = typename SPEC::T;
 
         auto result = env.environment->attr("reset")();
@@ -77,11 +81,11 @@ namespace rl_tools{
         state.reward = 0;
     }
     template<typename DEVICE, typename SPEC, typename RNG>
-    static void sample_initial_state(DEVICE& device, const PythonEnvironment<SPEC>& env, typename PythonEnvironment<SPEC>::State& state, RNG& rng){
-        initial_state(device, env, state);
+    static void sample_initial_state(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters, typename PythonEnvironment<SPEC>::State& state, RNG& rng){
+        initial_state(device, env, parameters, state);
     }
     template<typename DEVICE, typename SPEC, typename ACTION_SPEC, typename RNG>
-    typename SPEC::T step(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::State& state, const Matrix<ACTION_SPEC>& action, typename PythonEnvironment<SPEC>::State& next_state, RNG& rng) {
+    typename SPEC::T step(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters, const typename PythonEnvironment<SPEC>::State& state, const Matrix<ACTION_SPEC>& action, typename PythonEnvironment<SPEC>::State& next_state, RNG& rng) {
         static_assert(ACTION_SPEC::ROWS == 1);
         static_assert(ACTION_SPEC::COLS == SPEC::ACTION_DIM);
         using T = typename SPEC::T;
@@ -107,7 +111,7 @@ namespace rl_tools{
         return 0;
     }
     template<typename DEVICE, typename SPEC, typename ACTION_SPEC, typename RNG>
-    static typename SPEC::T reward(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::State& state, const Matrix<ACTION_SPEC>& action, const typename PythonEnvironment<SPEC>::State& next_state, RNG& rng){
+    static typename SPEC::T reward(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters, const typename PythonEnvironment<SPEC>::State& state, const Matrix<ACTION_SPEC>& action, const typename PythonEnvironment<SPEC>::State& next_state, RNG& rng){
         static_assert(ACTION_SPEC::ROWS == 1);
         static_assert(ACTION_SPEC::COLS == SPEC::ACTION_DIM);
         using T = typename SPEC::T;
@@ -115,7 +119,7 @@ namespace rl_tools{
     }
 
     template<typename DEVICE, typename SPEC, typename OBS_SPEC, typename RNG>
-    static void observe(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::State& state, Matrix<OBS_SPEC>& observation, RNG& rng){
+    static void observe(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters, const typename PythonEnvironment<SPEC>::State& state, Matrix<OBS_SPEC>& observation, RNG& rng){
         static_assert(OBS_SPEC::ROWS == 1);
         static_assert(OBS_SPEC::COLS == SPEC::OBSERVATION_DIM);
         using T = typename SPEC::T;
@@ -125,7 +129,7 @@ namespace rl_tools{
         }
     }
     template<typename DEVICE, typename SPEC, typename RNG>
-    static bool terminated(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::State state, RNG& rng){
+    static bool terminated(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters, const typename PythonEnvironment<SPEC>::State state, RNG& rng){
         return state.terminated;
     }
     template<typename DEVICE, typename SPEC>

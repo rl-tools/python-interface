@@ -27,6 +27,7 @@ struct PythonEnvironment{
     using SPEC = T_SPEC;
     using T = typename SPEC::T;
     using TI = typename SPEC::TI;
+    struct Parameters{};
     using State = PythonEnvironmentState<T, TI, SPEC::OBSERVATION_DIM>;
     static constexpr TI OBSERVATION_DIM = SPEC::OBSERVATION_DIM;
     static constexpr TI OBSERVATION_DIM_PRIVILEGED = SPEC::OBSERVATION_DIM;
