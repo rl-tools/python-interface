@@ -127,10 +127,10 @@ namespace RL_TOOLS_MODULE_NAME{
             }
             auto observation_data_ptr = static_cast<T*>(observation_info.ptr);
             size_t num_elements = observation_info.shape[0];
-            if(num_elements != ENVIRONMENT::OBSERVATION_DIM){
+            if(num_elements != ENVIRONMENT::Observation::DIM){
                 throw std::runtime_error("Incompatible observation dimension. Check the dimension of the observation returned by env.step() and the one configured when building the RLtools interface");
             }
-            rlt::MatrixStatic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::OBSERVATION_DIM>> observation_rlt;
+            rlt::MatrixStatic<rlt::matrix::Specification<T, TI, 1, ENVIRONMENT::Observation::DIM>> observation_rlt;
             rlt::malloc(device, observation_rlt);
             for(TI observation_i=0; observation_i<num_elements; observation_i++){
                 rlt::set(observation_rlt, 0, observation_i, observation_data_ptr[observation_i]);

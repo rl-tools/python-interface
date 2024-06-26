@@ -119,7 +119,7 @@ namespace rl_tools{
     }
 
     template<typename DEVICE, typename SPEC, typename OBS_SPEC, typename RNG>
-    static void observe(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters, const typename PythonEnvironment<SPEC>::State& state, Matrix<OBS_SPEC>& observation, RNG& rng){
+    static void observe(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters, const typename PythonEnvironment<SPEC>::State& state, const PythonEnvironmentObservation<SPEC>&, Matrix<OBS_SPEC>& observation, RNG& rng){
         static_assert(OBS_SPEC::ROWS == 1);
         static_assert(OBS_SPEC::COLS == SPEC::OBSERVATION_DIM);
         using T = typename SPEC::T;
