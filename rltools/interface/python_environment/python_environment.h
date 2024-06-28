@@ -3,6 +3,8 @@
 #include <pybind11/numpy.h>
 #include <pybind11/stl.h>
 
+#include <rl_tools/rl/environments/environments.h>
+
 
 template <typename T_T, typename T_TI, T_TI T_OBSERVATION_DIM, T_TI T_ACTION_DIM>
 struct PythonEnvironmentSpecification{
@@ -32,7 +34,7 @@ struct PythonEnvironmentObservation{
 };
 
 template <typename T_SPEC>
-struct PythonEnvironment{
+struct PythonEnvironment: rl_tools::rl::environments::Environment<typename T_SPEC::T, typename T_SPEC::TI>{
     using SPEC = T_SPEC;
     using T = typename SPEC::T;
     using TI = typename SPEC::TI;

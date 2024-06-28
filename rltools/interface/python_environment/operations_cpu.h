@@ -63,6 +63,10 @@ namespace rl_tools{
         }
     }
     template<typename DEVICE, typename SPEC>
+    void free(DEVICE& device, PythonEnvironment<SPEC>& env){
+        // delete env.environment;
+    }
+    template<typename DEVICE, typename SPEC>
     static void init(DEVICE& device, PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters){}
     template<typename DEVICE, typename SPEC>
     static void initial_parameters(DEVICE& device, const PythonEnvironment<SPEC>& env, typename PythonEnvironment<SPEC>::Parameters& parameters){}
@@ -131,9 +135,5 @@ namespace rl_tools{
     template<typename DEVICE, typename SPEC, typename RNG>
     static bool terminated(DEVICE& device, const PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters, const typename PythonEnvironment<SPEC>::State state, RNG& rng){
         return state.terminated;
-    }
-    template<typename DEVICE, typename SPEC>
-    void free(DEVICE& device, PythonEnvironment<SPEC>& env){
-        delete env.environment;
     }
 }
