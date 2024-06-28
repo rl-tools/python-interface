@@ -7,7 +7,7 @@ from .accelerate import acceleration_flags
 def load_checkpoint_from_path(checkpoint_path, interface_name="default", force_recompile=False, verbose=False):
     with open(checkpoint_path, "r") as f:
         checkpoint = f.read()
-    return load_checkpoint(checkpoint, interface_name="default", force_recompile=force_recompile, verbose=verbose)
+    return load_checkpoint(checkpoint, interface_name=interface_name, force_recompile=force_recompile, verbose=verbose)
 
 def load_checkpoint(checkpoint, interface_name="default", force_recompile=False, verbose=False):
     module_name = f"load_checkpoint_{interface_name}"
