@@ -9,7 +9,7 @@ This wrapper is work in progress and for now just exposes the SAC training loop 
 ```
 pip install rltools gymnasium
 ```
-
+> **Note**: On macOS you might have to install and accept the Xcode CLI license terms by `sudo xcodebuild -license` because we use `clang` in the background to compile RLtools operations just-in-time.
 ### Example:
 ```
 from rltools import SAC
