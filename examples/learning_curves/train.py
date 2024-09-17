@@ -143,12 +143,12 @@ environment_configs = {
 
 library_configs = {
     "SAC":{
-        # "Pendulum-v1": {
-        #     "rltools": {**sac.default_config_rltools, **environment_configs["SAC"]["Pendulum-v1"]},
-        #     "sb3": {**sac.default_config_sb3, **environment_configs["SAC"]["Pendulum-v1"]},
-        #     "cleanrl": {**sac.default_config_cleanrl, **environment_configs["SAC"]["Pendulum-v1"]},
-        #     "sbx": {**sac.default_config_cleanrl, **environment_configs["SAC"]["Pendulum-v1"]}
-        # },
+        "Pendulum-v1": {
+            "rltools": {**sac.default_config_rltools, **environment_configs["SAC"]["Pendulum-v1"]},
+            "sb3": {**sac.default_config_sb3, **environment_configs["SAC"]["Pendulum-v1"]},
+            "cleanrl": {**sac.default_config_cleanrl, **environment_configs["SAC"]["Pendulum-v1"]},
+            "sbx": {**sac.default_config_cleanrl, **environment_configs["SAC"]["Pendulum-v1"]}
+        },
         # "Hopper-v4": {
         #     "rltools": {**sac.default_config_rltools, **environment_configs["SAC"]["Hopper-v4"]},
         #     "sb3": {**sac.default_config_sb3, **environment_configs["SAC"]["Hopper-v4"]},
@@ -177,12 +177,12 @@ library_configs = {
         #     "cleanrltrunc": {**ppo.default_config_cleanrltrunc, **environment_configs["PPO"]["Hopper-v4"]},
         #     "sbx": {**ppo.default_config_sbx, **environment_configs["PPO"]["Hopper-v4"]}
         # },
-        "Ant-v4": {
-            "rltools": {**ppo.default_config_rltools, **environment_configs["PPO"]["Ant-v4"]},
-            "sb3": {**ppo.default_config_sb3, **environment_configs["PPO"]["Ant-v4"]},
-            "cleanrl": {**ppo.default_config_cleanrl, **environment_configs["PPO"]["Ant-v4"]},
-            "sbx": {**ppo.default_config_sbx, **environment_configs["PPO"]["Ant-v4"]}
-        },
+        # "Ant-v4": {
+        #     "rltools": {**ppo.default_config_rltools, **environment_configs["PPO"]["Ant-v4"]},
+        #     "sb3": {**ppo.default_config_sb3, **environment_configs["PPO"]["Ant-v4"]},
+        #     "cleanrl": {**ppo.default_config_cleanrl, **environment_configs["PPO"]["Ant-v4"]},
+        #     "sbx": {**ppo.default_config_sbx, **environment_configs["PPO"]["Ant-v4"]}
+        # },
     },
     "TD3":{
         # "Pendulum-v1": {

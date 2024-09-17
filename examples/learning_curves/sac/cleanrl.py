@@ -95,6 +95,8 @@ def train_cleanrl(config):
         def get_action(self, x):
             mean, log_std = self(x)
             std = log_std.exp()
+            if random.random() < 0.001:
+                print(f"mean: {mean}, std: {std}")
             normal = torch.distributions.Normal(mean, std)
             x_t = normal.rsample()  # for reparameterization trick (mean + std * N(0,1))
             y_t = torch.tanh(x_t)
