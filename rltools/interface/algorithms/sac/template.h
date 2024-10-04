@@ -11,7 +11,8 @@ namespace RL_TOOLS_MODULE_NAME{
 
     // This should stay in sync with the parameters in https://github.com/rl-tools/rl-tools/blob/a98bc461f7ebfed0ba71c653216edec6d9334b78/include/rl_tools/rl/algorithms/sac/loop/core/config.h#L18
     template <typename T, typename TI, typename ENVIRONMENT, TI T_EPISODE_STEP_LIMIT>
-    struct SAC_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::sac::loop::core::DefaultParameters<T, TI, ENVIRONMENT>{
+    // struct SAC_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::sac::loop::core::DefaultParameters<T, TI, ENVIRONMENT>{
+    struct SAC_LOOP_CORE_PARAMETERS{
         struct SAC_PARAMETERS{
             static constexpr T GAMMA = $GAMMA;
             static constexpr TI ACTOR_BATCH_SIZE = $ACTOR_BATCH_SIZE;
@@ -51,6 +52,9 @@ namespace RL_TOOLS_MODULE_NAME{
         static constexpr bool COLLECT_EPISODE_STATS = $COLLECT_EPISODE_STATS;
         static constexpr TI EPISODE_STATS_BUFFER_SIZE = $EPISODE_STATS_BUFFER_SIZE;
         static constexpr bool SHARED_BATCH = $SHARED_BATCH;
+
+        using INITIALIZER = rlt::nn::layers::dense::DefaultInitializer<T, TI>;
+
 
         struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<T>{
             static constexpr T ALPHA = $OPTIMIZER_ALPHA;
