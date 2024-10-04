@@ -171,9 +171,9 @@ namespace RL_TOOLS_MODULE_NAME{
 
         //     return pybind11::array_t<T>(ENVIRONMENT::ACTION_DIM, action.data());
         // }
-        std::string export_policy(){
-            return rlt::save_code(device, rlt::get_actor(*this), "policy");
-        }
+        // std::string export_policy(){
+        //     return rlt::save_code(device, rlt::get_actor(*this), "policy");
+        // }
         ~State(){
             rlt::free(device, static_cast<LOOP_STATE&>(*this));
         }
@@ -187,9 +187,9 @@ PYBIND11_MODULE(RL_TOOLS_MODULE_NAME, m){
     m.doc() = "RLtools Training Loop";
     pybind11::class_<RL_TOOLS_MODULE_NAME::State>(m, "State")
             .def(pybind11::init<RL_TOOLS_MODULE_NAME::TI>())
-            .def("step", &RL_TOOLS_MODULE_NAME::State::step, "Step the loop")
+            .def("step", &RL_TOOLS_MODULE_NAME::State::step, "Step the loop");
             // .def("action", &RL_TOOLS_MODULE_NAME::State::action, "Get the action for the given observation")
-            .def("export_policy", &RL_TOOLS_MODULE_NAME::State::export_policy, "Export the policy to a python file");
+            // .def("export_policy", &RL_TOOLS_MODULE_NAME::State::export_policy, "Export the policy to a python file");
 #ifdef RL_TOOLS_USE_PYTHON_ENVIRONMENT
     m.def("set_environment_factory", &RL_TOOLS_MODULE_NAME::set_environment_factory, "Set the environment factory");
 #endif

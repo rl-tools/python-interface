@@ -29,6 +29,8 @@ def SAC(env_factory, # can be either a lambda that creates a new Gym-like enviro
     # Same set of parameters as rl::algorithms::sac::loop::core::DefaultParameters
     N_ENVIRONMENTS = 1,
     N_WARMUP_STEPS = None,
+    N_WARMUP_STEPS_ACTOR = None,
+    N_WARMUP_STEPS_CRITIC = None,
     STEP_LIMIT = 10000,
     REPLAY_BUFFER_CAP = None,
     EPISODE_STEP_LIMIT = None,
@@ -69,6 +71,8 @@ def SAC(env_factory, # can be either a lambda that creates a new Gym-like enviro
     TARGET_ENTROPY = TARGET_ENTROPY if TARGET_ENTROPY is not None else -ACTION_DIM
     REPLAY_BUFFER_CAP = REPLAY_BUFFER_CAP if REPLAY_BUFFER_CAP is not None else STEP_LIMIT
     N_WARMUP_STEPS = N_WARMUP_STEPS if N_WARMUP_STEPS is not None else max(ACTOR_BATCH_SIZE, CRITIC_BATCH_SIZE)
+    N_WARMUP_STEPS_ACTOR = N_WARMUP_STEPS_ACTOR if N_WARMUP_STEPS_ACTOR is not None else N_WARMUP_STEPS
+    N_WARMUP_STEPS_CRITIC = N_WARMUP_STEPS_CRITIC if N_WARMUP_STEPS_CRITIC is not None else N_WARMUP_STEPS
 
     compile_time_parameters = sanitize_values(locals())
 

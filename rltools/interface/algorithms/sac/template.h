@@ -16,17 +16,29 @@ namespace RL_TOOLS_MODULE_NAME{
             static constexpr T GAMMA = $GAMMA;
             static constexpr TI ACTOR_BATCH_SIZE = $ACTOR_BATCH_SIZE;
             static constexpr TI CRITIC_BATCH_SIZE = $CRITIC_BATCH_SIZE;
-            static constexpr TI N_WARMUP_STEPS_CRITIC = 0;
-            static constexpr TI N_WARMUP_STEPS_ACTOR = 0;
             static constexpr TI CRITIC_TRAINING_INTERVAL = $CRITIC_TRAINING_INTERVAL;
             static constexpr TI ACTOR_TRAINING_INTERVAL = $ACTOR_TRAINING_INTERVAL;
             static constexpr TI CRITIC_TARGET_UPDATE_INTERVAL = $CRITIC_TARGET_UPDATE_INTERVAL;
             static constexpr T ACTOR_POLYAK = $ACTOR_POLYAK;
             static constexpr T CRITIC_POLYAK = $CRITIC_POLYAK;
             static constexpr bool IGNORE_TERMINATION = $IGNORE_TERMINATION; 
+            static constexpr TI SEQUENCE_LENGTH = 1;
+            static constexpr bool ENTROPY_BONUS = true;
+            static constexpr bool ENTROPY_BONUS_NEXT_STEP = true;
+            static constexpr bool MASK_NON_TERMINAL = true;
+
+            static constexpr T TARGET_ENTROPY = $TARGET_ENTROPY;
+            static constexpr T ALPHA = $ALPHA;
+            static constexpr bool ADAPTIVE_ALPHA = $ADAPTIVE_ALPHA;
+            static constexpr T LOG_STD_LOWER_BOUND = $LOG_STD_LOWER_BOUND;
+            static constexpr T LOG_STD_UPPER_BOUND = $LOG_STD_UPPER_BOUND;
+            static constexpr T LOG_PROBABILITY_EPSILON = $LOG_PROBABILITY_EPSILON;
         };
         static constexpr TI N_ENVIRONMENTS = $N_ENVIRONMENTS;
         static constexpr TI N_WARMUP_STEPS = $N_WARMUP_STEPS;
+        static constexpr TI N_WARMUP_STEPS_CRITIC = $N_WARMUP_STEPS_CRITIC; 
+        static constexpr TI N_WARMUP_STEPS_ACTOR = $N_WARMUP_STEPS_ACTOR;
+        static_assert(N_WARMUP_STEPS >= SAC_PARAMETERS::ACTOR_BATCH_SIZE);
         static constexpr TI STEP_LIMIT = $STEP_LIMIT;
         static constexpr TI REPLAY_BUFFER_CAP = $REPLAY_BUFFER_CAP;
         static constexpr TI EPISODE_STEP_LIMIT = T_EPISODE_STEP_LIMIT;
@@ -39,12 +51,6 @@ namespace RL_TOOLS_MODULE_NAME{
         static constexpr bool COLLECT_EPISODE_STATS = $COLLECT_EPISODE_STATS;
         static constexpr TI EPISODE_STATS_BUFFER_SIZE = $EPISODE_STATS_BUFFER_SIZE;
         static constexpr bool SHARED_BATCH = $SHARED_BATCH;
-        static constexpr T TARGET_ENTROPY = $TARGET_ENTROPY;
-        static constexpr T ALPHA = $ALPHA;
-        static constexpr bool ADAPTIVE_ALPHA = $ADAPTIVE_ALPHA;
-        static constexpr T LOG_STD_LOWER_BOUND = $LOG_STD_LOWER_BOUND;
-        static constexpr T LOG_STD_UPPER_BOUND = $LOG_STD_UPPER_BOUND;
-        static constexpr T LOG_PROBABILITY_EPSILON = $LOG_PROBABILITY_EPSILON;
 
         struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<T>{
             static constexpr T ALPHA = $OPTIMIZER_ALPHA;
@@ -53,6 +59,9 @@ namespace RL_TOOLS_MODULE_NAME{
             static constexpr T EPSILON = $OPTIMIZER_EPSILON;
             static constexpr T EPSILON_SQRT = $OPTIMIZER_EPSILON_SQRT;
         };
+        using ACTOR_OPTIMIZER_PARAMETERS = OPTIMIZER_PARAMETERS;
+        using CRITIC_OPTIMIZER_PARAMETERS = OPTIMIZER_PARAMETERS;
+        using ALPHA_OPTIMIZER_PARAMETERS = OPTIMIZER_PARAMETERS;
 
 
     };
