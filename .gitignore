@@ -13,3 +13,6 @@ a.out
 *.obj
 
 *.pickle
+
+
+/**/.DS_Store

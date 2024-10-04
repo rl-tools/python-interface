@@ -2,7 +2,7 @@ from string import Template
 import struct
 
 file_template = Template("""
-#include <rl_tools/containers.h>
+#include <rl_tools/containers/matrix/matrix.h>
 #include <rl_tools/nn/layers/dense/layer.h>
 #include <rl_tools/nn_models/sequential/model.h>
 #include <rl_tools/utils/generic/typing.h>
