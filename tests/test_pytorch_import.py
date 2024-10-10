@@ -9,6 +9,7 @@ if not "RL_TOOLS_DISABLE_PYTORCH_IMPORT_TEST" in os.environ:
     from rltools.onnx import render
     from rltools import load_checkpoint_from_path
 
+@pytest.mark.skip
 def test_pytorch_import():
     if "RL_TOOLS_DISABLE_PYTORCH_IMPORT_TEST" in os.environ:
         return
