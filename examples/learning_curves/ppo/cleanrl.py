@@ -5,7 +5,7 @@ import random
 import time
 
 import gymnasium as gym
-from gymnasium.experimental.wrappers import RescaleActionV0
+from gymnasium.wrappers import RescaleAction
 import numpy as np
 from evaluate_policy import evaluate_policy
 
@@ -14,13 +14,13 @@ def make_env(config):
         env = gym.make(config["environment_name"])
         # env = gym.wrappers.FlattenObservation(env)  # deal with dm_control's Dict observation space
         # env = gym.wrappers.RecordEpisodeStatistics(env)
-        # env = gym.wrappers.ClipAction(env)
+        # 
         # env = gym.wrappers.NormalizeObservation(env)
         # env = gym.wrappers.TransformObservation(env, lambda obs: np.clip(obs, -10, 10))
         # env = gym.wrappers.NormalizeReward(env, gamma=gamma)
         # env = gym.wrappers.TransformReward(env, lambda reward: np.clip(reward, -10, 10))
-        env = RescaleActionV0(env, -1, 1)
-        env = gym.wrappers.ClipAction(env)
+        env = RescaleAction(env, -1, 1)
+        
         env.reset(seed=config["seed"])
         return env
     return thunk

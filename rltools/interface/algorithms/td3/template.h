@@ -25,6 +25,8 @@ namespace RL_TOOLS_MODULE_NAME{
             static constexpr T TARGET_NEXT_ACTION_NOISE_STD = $TARGET_NEXT_ACTION_NOISE_STD;
             static constexpr T TARGET_NEXT_ACTION_NOISE_CLIP = $TARGET_NEXT_ACTION_NOISE_CLIP;
             static constexpr bool IGNORE_TERMINATION = $IGNORE_TERMINATION;
+            static constexpr TI SEQUENCE_LENGTH = 1;
+            static constexpr bool MASK_NON_TERMINAL = true;
         };
         static constexpr TI N_ENVIRONMENTS = $N_ENVIRONMENTS;
         static constexpr int N_WARMUP_STEPS = $N_WARMUP_STEPS;

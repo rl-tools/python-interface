@@ -6,7 +6,7 @@ import time
 from dataclasses import dataclass
 
 import gymnasium as gym
-from gymnasium.experimental.wrappers import RescaleActionV0
+from gymnasium.wrappers import RescaleAction
 import numpy as np
 
 from evaluate_policy import evaluate_policy
@@ -14,8 +14,8 @@ from evaluate_policy import evaluate_policy
 def make_env(config):
     def thunk(**kwargs):
         env = gym.make(config["environment_name"], **kwargs)
-        env = RescaleActionV0(env, -1, 1)
-        env = gym.wrappers.ClipAction(env)
+        env = RescaleAction(env, -1, 1)
+        
         env.reset(seed=config["seed"])
         return env
     return thunk

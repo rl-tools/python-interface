@@ -1,6 +1,6 @@
 from evaluate_policy import evaluate_policy
 import gymnasium as gym
-from gymnasium.experimental.wrappers import RescaleActionV0
+from gymnasium.wrappers import RescaleAction
 import numpy as np
 
 default_config = {
@@ -22,8 +22,8 @@ def train_sb3(config):
     torch.manual_seed(config["seed"])
     def env_factory(seed=0):
         env = gym.make(config["environment_name"])
-        env = RescaleActionV0(env, -1, 1)
-        env = gym.wrappers.ClipAction(env)
+        env = RescaleAction(env, -1, 1)
+        
         env.reset(seed=seed)
         return env
     # envs = DummyVecEnv([lambda: env_factory(seed=(config["seed"]*config["n_environments"] + i)) for i in range(config["n_environments"])])

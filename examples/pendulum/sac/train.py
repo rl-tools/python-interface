@@ -1,13 +1,12 @@
 from rltools import SAC
 import gymnasium as gym
-from gymnasium.experimental.wrappers import RescaleActionV0
+from gymnasium.wrappers import RescaleAction
 import math
 
 seed = 0x1337
 def env_factory(**kwargs):
     env = gym.make("Pendulum-v1", **kwargs)
-    env = RescaleActionV0(env, -1, 1) # wlog actions are normalized to [-1, 1] in RLtools
-    env = gym.wrappers.ClipAction(env)
+    env = RescaleAction(env, -1, 1) # wlog actions are normalized to [-1, 1] in RLtools
     env.reset(seed=seed)
     return env
 

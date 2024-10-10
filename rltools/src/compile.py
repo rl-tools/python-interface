@@ -24,7 +24,7 @@ def compile_option(type, option):
             raise Exception(f"Unknown option type {type}")
     elif sys.platform.startswith("win"):
         if type == "header_search_path":
-            return f"/I{option}"
+            return f"/I\"{option}\""
         elif type == "macro_definition":
             return f"/D{option}"
         else:
@@ -100,7 +100,7 @@ def compile(source, module, flags=[], enable_optimization=True, force_recompile=
             extension = f"pypy{sys.version_info.major}{sys.version_info.minor}-pp{sys.pypy_version_info.major}{sys.pypy_version_info.minor}-{sys.platform}.so"
     elif sys.platform.startswith('win'):
         extension = "pyd"
-        link_python_args = [f"/link /LIBPATH:"+os.path.join(sys.base_exec_prefix, "libs")]
+        link_python_args = [f"/link /LIBPATH:\""+os.path.join(sys.base_exec_prefix, "libs\"")]
     
     output_dir = f"{CACHE_PATH}/build/{module}"
     os.makedirs(output_dir, exist_ok=True)
@@ -110,7 +110,7 @@ def compile(source, module, flags=[], enable_optimization=True, force_recompile=
     compilers = find_compiler()
 
     cmds = [
-        wrap_quotes([
+        [
             compiler,
             shared_flag, 
             pic_flag,
@@ -129,7 +129,7 @@ def compile(source, module, flags=[], enable_optimization=True, force_recompile=
             link_stdlib_flag,
             *link_python_args,
             *(["-o", output_path] if not sys.platform.startswith('win') else [f"/OUT:{output_path}"]),
-        ])
+        ]
         for compiler in compilers
     ]
     command_strings = [" ".join(cmd) for cmd in cmds]

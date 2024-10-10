@@ -20,7 +20,7 @@
 #include <rl_tools/nn/layers/standardize/operations_generic.h>
 #include <rl_tools/nn_models/mlp_unconditional_stddev/operations_generic.h>
 #include <rl_tools/nn_models/mlp/operations_generic.h>
-#include <rl_tools/nn_models/sequential_v2/operations_generic.h>
+#include <rl_tools/nn_models/sequential/operations_generic.h>
 #include <rl_tools/nn/optimizers/adam/operations_generic.h>
 
 #include <rl_tools/nn/optimizers/adam/instance/persist_code.h>
@@ -29,7 +29,7 @@
 #include <rl_tools/nn/layers/standardize/persist_code.h>
 #include <rl_tools/nn/layers/dense/persist_code.h>
 #include <rl_tools/nn_models/mlp/persist_code.h>
-#include <rl_tools/nn_models/sequential_v2/persist_code.h>
+#include <rl_tools/nn_models/sequential/persist_code.h>
 
 #include "loop_core_config.h"
 
@@ -107,7 +107,7 @@ namespace RL_TOOLS_MODULE_NAME{
     constexpr TI EVALUATION_BATCH_SIZE = 1;
     using ACTOR_TYPE = rlt::utils::typing::remove_reference_t<decltype(rlt::get_actor(std::declval<LOOP_STATE&>()))>;
     using EVALUATION_ACTOR_TEMP = ACTOR_TYPE::template CHANGE_BATCH_SIZE<TI, EVALUATION_BATCH_SIZE>;
-    using EVALUATION_ACTOR = EVALUATION_ACTOR_TEMP::template CHANGE_CAPABILITY<rlt::nn::layer_capability::Forward<>>;
+    using EVALUATION_ACTOR = EVALUATION_ACTOR_TEMP::template CHANGE_CAPABILITY<rlt::nn::capability::Forward<>>;
     using EVALUATION_ACTOR_STATE = EVALUATION_ACTOR::State<>;
     using EVALUATION_ACTOR_BUFFER = EVALUATION_ACTOR::Buffer<>;
 

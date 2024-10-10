@@ -1,6 +1,6 @@
 from evaluate_policy import evaluate_policy
 import gymnasium as gym
-from gymnasium.experimental.wrappers import RescaleActionV0
+from gymnasium.wrappers import RescaleAction
 import numpy as np
 
 default_config = {}
@@ -16,8 +16,8 @@ def train_sbx(config):
     np.random.seed(config["seed"])
     def env_factory(**kwargs):
         env = gym.make(config["environment_name"], **kwargs)
-        env = RescaleActionV0(env, -1, 1)
-        env = gym.wrappers.ClipAction(env)
+        env = RescaleAction(env, -1, 1)
+        
         env.reset(seed=config["seed"])
         return env
     env = env_factory()

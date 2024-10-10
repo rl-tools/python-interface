@@ -58,7 +58,7 @@ namespace rl_tools{
 //             std::cout << "Action dim: " << action_i << " low: " << current_low << " high: " << current_high << std::endl;
 // #endif
             if(math::abs(device.math, current_low - (-1.0)) > 1e-6 || math::abs(device.math, current_high - 1.0) > 1e-6){
-                throw std::runtime_error("Incompatible action space limits. Limits: low " + std::to_string(current_low) + ", high " + std::to_string(current_high) + " (expected -1.0 and 1.0). You should use a RescaleActionV0(env, -1, 1) or equivalent.");
+                throw std::runtime_error("Incompatible action space limits. Limits: low " + std::to_string(current_low) + ", high " + std::to_string(current_high) + " (expected -1.0 and 1.0). You should use a RescaleAction(env, -1, 1) or equivalent.");
             };
         }
     }
