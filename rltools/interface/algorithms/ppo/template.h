@@ -7,7 +7,7 @@
 
 namespace rlt = rl_tools;
 
-template<typename T, typename TI, typename ENVIRONMENT, TI T_EPISODE_STEP_LIMIT>
+template<typename T, typename TI, typename ENVIRONMENT>
 struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultParameters<T, TI, ENVIRONMENT>{
     static constexpr TI STEP_LIMIT = $STEP_LIMIT;
     static constexpr TI ACTOR_HIDDEN_DIM = $ACTOR_HIDDEN_DIM;
@@ -16,7 +16,7 @@ struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultPa
     static constexpr TI CRITIC_HIDDEN_DIM = $CRITIC_HIDDEN_DIM;
     static constexpr TI CRITIC_NUM_LAYERS = $CRITIC_NUM_LAYERS;
     static constexpr auto CRITIC_ACTIVATION_FUNCTION = rlt::nn::activation_functions::ActivationFunction::$CRITIC_ACTIVATION_FUNCTION;
-    static constexpr TI EPISODE_STEP_LIMIT = T_EPISODE_STEP_LIMIT;
+    static constexpr TI EPISODE_STEP_LIMIT = ENVIRONMENT::EPISODE_STEP_LIMIT;
     static constexpr TI N_ENVIRONMENTS = $N_ENVIRONMENTS;
     static constexpr TI ON_POLICY_RUNNER_STEPS_PER_ENV = $ON_POLICY_RUNNER_STEPS_PER_ENV;
     static constexpr TI DATASET_SIZE = ON_POLICY_RUNNER_STEPS_PER_ENV * N_ENVIRONMENTS;
@@ -56,5 +56,5 @@ struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultPa
 };
 
 
-template <typename T, typename TI, typename RNG, typename ENVIRONMENT, TI T_EPISODE_STEP_LIMIT>
-using LOOP_CORE_CONFIG_FACTORY = rlt::rl::algorithms::ppo::loop::core::Config<T, TI, RNG, ENVIRONMENT, PPO_LOOP_CORE_PARAMETERS<T, TI, ENVIRONMENT, T_EPISODE_STEP_LIMIT>>;
+template <typename T, typename TI, typename RNG, typename ENVIRONMENT>
+using LOOP_CORE_CONFIG_FACTORY = rlt::rl::algorithms::ppo::loop::core::Config<T, TI, RNG, ENVIRONMENT, PPO_LOOP_CORE_PARAMETERS<T, TI, ENVIRONMENT>>;

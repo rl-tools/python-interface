@@ -10,7 +10,7 @@ namespace RL_TOOLS_MODULE_NAME{
     namespace rlt = rl_tools;
 
     // This should stay in sync with the parameters in https://github.com/rl-tools/rl-tools/blob/a98bc461f7ebfed0ba71c653216edec6d9334b78/include/rl_tools/rl/algorithms/td3/loop/core/config.h#L18
-    template <typename T, typename TI, typename ENVIRONMENT, TI T_EPISODE_STEP_LIMIT>
+    template <typename T, typename TI, typename ENVIRONMENT>
     struct TD3_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::td3::loop::core::DefaultParameters<T, TI, ENVIRONMENT>{
         struct TD3_PARAMETERS{
             static constexpr T GAMMA = $GAMMA;
@@ -32,7 +32,7 @@ namespace RL_TOOLS_MODULE_NAME{
         static constexpr int N_WARMUP_STEPS = $N_WARMUP_STEPS;
         static constexpr TI STEP_LIMIT = $STEP_LIMIT;
         static constexpr TI REPLAY_BUFFER_CAP = $REPLAY_BUFFER_CAP;
-        static constexpr TI EPISODE_STEP_LIMIT = T_EPISODE_STEP_LIMIT;
+        static constexpr TI EPISODE_STEP_LIMIT = ENVIRONMENT::EPISODE_STEP_LIMIT;
 
         static constexpr TI ACTOR_HIDDEN_DIM = $ACTOR_HIDDEN_DIM;
         static constexpr TI ACTOR_NUM_LAYERS = $ACTOR_NUM_LAYERS;
@@ -55,6 +55,6 @@ namespace RL_TOOLS_MODULE_NAME{
         };
     };
 
-    template <typename T, typename TI, typename RNG, typename ENVIRONMENT, TI T_EPISODE_STEP_LIMIT>
-    using LOOP_CORE_CONFIG_FACTORY = rlt::rl::algorithms::td3::loop::core::Config<T, TI, RNG, ENVIRONMENT, TD3_LOOP_CORE_PARAMETERS<T, TI, ENVIRONMENT, T_EPISODE_STEP_LIMIT>>;
+    template <typename T, typename TI, typename RNG, typename ENVIRONMENT>
+    using LOOP_CORE_CONFIG_FACTORY = rlt::rl::algorithms::td3::loop::core::Config<T, TI, RNG, ENVIRONMENT, TD3_LOOP_CORE_PARAMETERS<T, TI, ENVIRONMENT>>;
 }

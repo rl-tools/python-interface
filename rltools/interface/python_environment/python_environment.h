@@ -6,12 +6,13 @@
 #include <rl_tools/rl/environments/environments.h>
 
 
-template <typename T_T, typename T_TI, T_TI T_OBSERVATION_DIM, T_TI T_ACTION_DIM>
+template <typename T_T, typename T_TI, T_TI T_OBSERVATION_DIM, T_TI T_ACTION_DIM, T_TI T_EPISODE_STEP_LIMIT>
 struct PythonEnvironmentSpecification{
     using T = T_T;
     using TI = T_TI;
     static constexpr TI OBSERVATION_DIM = T_OBSERVATION_DIM;
     static constexpr TI ACTION_DIM = T_ACTION_DIM;
+    static constexpr TI EPISODE_STEP_LIMIT = T_EPISODE_STEP_LIMIT;
 };
 
 template <typename T_T, typename T_TI>
@@ -44,6 +45,7 @@ struct PythonEnvironment: rl_tools::rl::environments::Environment<typename T_SPE
     using ObservationPrivileged = Observation;
     static constexpr TI ACTION_DIM = SPEC::ACTION_DIM;
     pybind11::object* environment;
+    static constexpr TI EPISODE_STEP_LIMIT = SPEC::EPISODE_STEP_LIMIT;
     // T action_space_range[ACTION_DIM];
     // T action_space_offset[ACTION_DIM];
 };
