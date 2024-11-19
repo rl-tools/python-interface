@@ -45,6 +45,7 @@ namespace RL_TOOLS_MODULE_NAME{
         static constexpr TI EPISODE_STATS_BUFFER_SIZE = $EPISODE_STATS_BUFFER_SIZE;
         static constexpr T EXPLORATION_NOISE = $EXPLORATION_NOISE;
         static constexpr bool SHARED_BATCH = $SHARED_BATCH;
+        static constexpr bool SAMPLE_ENVIRONMENT_PARAMETERS = true;
 
         struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<T>{
             static constexpr T ALPHA = $OPTIMIZER_ALPHA;

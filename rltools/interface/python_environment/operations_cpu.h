@@ -67,7 +67,7 @@ namespace rl_tools{
         // delete env.environment;
     }
     template<typename DEVICE, typename SPEC>
-    static void init(DEVICE& device, PythonEnvironment<SPEC>& env, const typename PythonEnvironment<SPEC>::Parameters& parameters){}
+    static void init(DEVICE& device, PythonEnvironment<SPEC>& env){}
     template<typename DEVICE, typename SPEC>
     static void initial_parameters(DEVICE& device, const PythonEnvironment<SPEC>& env, typename PythonEnvironment<SPEC>::Parameters& parameters){}
     template<typename DEVICE, typename SPEC, typename RNG>

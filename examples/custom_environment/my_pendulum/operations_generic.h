@@ -22,7 +22,7 @@ namespace rl_tools{
     template<typename DEVICE, typename SPEC>
     static void free(DEVICE& device, const MyPendulum<SPEC>& env){ }
     template<typename DEVICE, typename SPEC>
-    static void init(DEVICE& device, const MyPendulum<SPEC>& env, typename MyPendulum<SPEC>::Parameters& parameters){ }
+    static void init(DEVICE& device, const MyPendulum<SPEC>& env){ }
     template<typename DEVICE, typename SPEC>
     static void initial_parameters(DEVICE& device, const MyPendulum<SPEC>& env, typename MyPendulum<SPEC>::Parameters& parameters){ }
     template<typename DEVICE, typename SPEC, typename RNG>

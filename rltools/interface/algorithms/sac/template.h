@@ -52,6 +52,8 @@ namespace RL_TOOLS_MODULE_NAME{
         static constexpr bool COLLECT_EPISODE_STATS = $COLLECT_EPISODE_STATS;
         static constexpr TI EPISODE_STATS_BUFFER_SIZE = $EPISODE_STATS_BUFFER_SIZE;
         static constexpr bool SHARED_BATCH = $SHARED_BATCH;
+        static constexpr bool SAMPLE_ENVIRONMENT_PARAMETERS = true;
+
 
         using INITIALIZER = rlt::nn::layers::dense::DefaultInitializer<T, TI>;
 
