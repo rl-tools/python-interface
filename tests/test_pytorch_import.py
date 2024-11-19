@@ -1,18 +1,17 @@
 import os
+import pytest
 os.environ["RL_TOOLS_IGNORE_TORCH_WARNING"] = "1"
 
-if not "RL_TOOLS_DISABLE_PYTORCH_IMPORT_TEST" in os.environ:
+@pytest.mark.skip
+def test_pytorch_import():
+    if "RL_TOOLS_DISABLE_PYTORCH_IMPORT_TEST" in os.environ:
+        return
     import torch
     import torch.nn as nn
     from rltools import CACHE_PATH
     from rltools.onnx import load_mlp, evaluate
     from rltools.onnx import render
     from rltools import load_checkpoint_from_path
-
-@pytest.mark.skip
-def test_pytorch_import():
-    if "RL_TOOLS_DISABLE_PYTORCH_IMPORT_TEST" in os.environ:
-        return
     torch.manual_seed(0)
 
     n_input_features = 4

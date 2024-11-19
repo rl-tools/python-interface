@@ -25,19 +25,19 @@ for env_name, selected_env in [("RLtools", custom_environment), ("Gymnasium", en
         selected_env,
         interface_name=env_name,
         enable_evaluation=True,
-        evaluation_interval=10,
+        evaluation_interval=100,
         # force_blas=True,
         num_evaluation_episodes=10,
-        OPTIMIZER_ALPHA=1e-3,
+        OPTIMIZER_ALPHA=1e-4,
         ACTION_ENTROPY_COEFFICIENT = 0.0,
-        N_EPOCHS = 2,
+        N_EPOCHS = 1,
         GAMMA = 0.9,
-        BATCH_SIZE = 256,
-        ACTOR_HIDDEN_DIM = 64,
-        CRITIC_HIDDEN_DIM = 64,
-        ON_POLICY_RUNNER_STEPS_PER_ENV = 1024,
-        N_ENVIRONMENTS = 4,
-        STEP_LIMIT = 74, # 1024 * 4 * 74 ~ 300k steps
+        BATCH_SIZE = 128,
+        ACTOR_HIDDEN_DIM = 32,
+        CRITIC_HIDDEN_DIM = 32,
+        ON_POLICY_RUNNER_STEPS_PER_ENV = 128,
+        N_ENVIRONMENTS = 8,
+        STEP_LIMIT = 2000, # 1024 * 4 * 74 ~ 300k steps
     )
     state = ppo.State(seed)
 
