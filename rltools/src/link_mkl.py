@@ -35,6 +35,8 @@ def link_mkl():
                 if not found:
                     print(f"MKL library {lib} not found.")
                     required_libraries_paths = None
+            if "MKL_NUM_THREADS" not in os.environ:
+                os.environ["MKL_NUM_THREADS"] = "1"
             required_libraries_paths_absolute = [str(p.locate()) for p in required_libraries_paths]
             required_libraries_search_paths = [str(os.path.dirname(p)) for p in required_libraries_paths_absolute]
             flags += [
