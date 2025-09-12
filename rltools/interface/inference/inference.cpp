@@ -4,6 +4,7 @@
 
 #include <rl_tools/nn/operations_generic.h>
 #include <rl_tools/nn/layers/dense/operations_generic.h>
+#include <rl_tools/nn/layers/td3_sampling/operations_generic.h>
 #include <rl_tools/nn/layers/standardize/operations_generic.h>
 #include <rl_tools/nn/layers/sample_and_squash/operations_generic.h>
 #include <rl_tools/nn_models/mlp_unconditional_stddev/operations_generic.h>
