@@ -48,7 +48,7 @@ namespace RL_TOOLS_MODULE_NAME{
 #ifdef RL_TOOLS_FORCE_BLAS
     static_assert(DEVICE::DEVICE_ID == rlt::devices::DeviceId::CPU_MKL || DEVICE::DEVICE_ID == rlt::devices::DeviceId::CPU_ACCELERATE || DEVICE::DEVICE_ID == rlt::devices::DeviceId::CPU_OPENBLAS);
 #endif
-    using RNG = decltype(rlt::random::default_engine(typename DEVICE::SPEC::RANDOM{}));
+    using RNG = DEVICE::SPEC::RANDOM::ENGINE<>;
     using TI = typename DEVICE::index_t;
 
     using T = RL_TOOLS_DTYPE;
@@ -76,6 +76,7 @@ namespace RL_TOOLS_MODULE_NAME{
 
 
     DEVICE device;
+    RNG rng;
 
     #ifdef RL_TOOLS_ENABLE_EVALUATION
     constexpr bool ENABLE_EVALUATION = true;
@@ -124,6 +125,7 @@ namespace RL_TOOLS_MODULE_NAME{
         EVALUATION_ACTOR_BUFFER evaluation_actor_buffer;
         bool evaluation_actor_synced = false;
         State(TI seed){
+            rlt::init(device, rng, seed);
             rlt::malloc(device, static_cast<LOOP_STATE&>(*this));
             rlt::init(device, static_cast<LOOP_STATE&>(*this), seed);
             rlt::malloc(device, evaluation_actor);

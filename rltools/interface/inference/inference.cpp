@@ -19,17 +19,20 @@ namespace rlt = rl_tools;
 
 
 using DEVICE = rlt::devices::DEVICE_FACTORY<>;
+using RNG = DEVICE::SPEC::RANDOM::ENGINE<>;
 
 DEVICE device;
-auto rng = rlt::random::default_engine(typename DEVICE::SPEC::RANDOM{});
+RNG rng;
 using MODEL_TYPE = decltype(policy::module);
 using T = typename MODEL_TYPE::T;
 using TI = typename DEVICE::index_t;
 typename MODEL_TYPE::template Buffer<1> buffer;
 bool initialized = false;
+constexpr TI seed = 0x1337;
 
 void init(){
     if(!initialized){
+        rlt::init(device, rng, seed);
         rlt::malloc(device, buffer);
     }
 }

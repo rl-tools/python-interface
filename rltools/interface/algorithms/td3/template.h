@@ -47,6 +47,10 @@ namespace RL_TOOLS_MODULE_NAME{
         static constexpr bool SHARED_BATCH = $SHARED_BATCH;
         static constexpr bool SAMPLE_ENVIRONMENT_PARAMETERS = true;
 
+        using INITIALIZER = rlt::nn::layers::dense::DefaultInitializer<T, TI>;
+
+        using BATCH_SAMPLING_PARAMETERS = rlt::rl::components::off_policy_runner::SequentialBatchParameters<T, TI, TD3_PARAMETERS::SEQUENCE_LENGTH, rlt::rl::components::off_policy_runner::SequentialBatchParametersDefault>;
+
         struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<T>{
             static constexpr T ALPHA = $OPTIMIZER_ALPHA;
             static constexpr T BETA_1 = $OPTIMIZER_BETA_1;

@@ -57,6 +57,7 @@ namespace RL_TOOLS_MODULE_NAME{
 
         using INITIALIZER = rlt::nn::layers::dense::DefaultInitializer<T, TI>;
 
+        using BATCH_SAMPLING_PARAMETERS = rlt::rl::components::off_policy_runner::SequentialBatchParameters<T, TI, SAC_PARAMETERS::SEQUENCE_LENGTH, rlt::rl::components::off_policy_runner::SequentialBatchParametersDefault>;
 
         struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<T>{
             static constexpr T ALPHA = $OPTIMIZER_ALPHA;
