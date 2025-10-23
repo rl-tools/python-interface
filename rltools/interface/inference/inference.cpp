@@ -25,7 +25,7 @@ using RNG = DEVICE::SPEC::RANDOM::ENGINE<>;
 DEVICE device;
 RNG rng;
 using MODEL_TYPE = decltype(policy::module);
-using T = typename MODEL_TYPE::T;
+using T = typename MODEL_TYPE::TYPE_POLICY::DEFAULT;
 using TYPE_POLICY = rlt::numeric_types::Policy<T>;
 using TI = typename DEVICE::index_t;
 typename MODEL_TYPE::template Buffer<1> buffer;
