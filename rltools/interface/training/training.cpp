@@ -24,6 +24,9 @@
 #include <rl_tools/nn_models/sequential/operations_generic.h>
 #include <rl_tools/nn/optimizers/adam/operations_generic.h>
 
+#include <rl_tools/containers/matrix/persist_code.h>
+#include <rl_tools/containers/tensor/persist_code.h>
+#include <rl_tools/numeric_types/persist_code.h>
 #include <rl_tools/nn/optimizers/adam/instance/persist_code.h>
 #include <rl_tools/nn/parameters/persist_code.h>
 #include <rl_tools/nn/layers/sample_and_squash/persist_code.h>
@@ -52,6 +55,7 @@ namespace RL_TOOLS_MODULE_NAME{
     using TI = typename DEVICE::index_t;
 
     using T = RL_TOOLS_DTYPE;
+    using TYPE_POLICY = rlt::numeric_types::Policy<T>;
 
 
     #ifdef RL_TOOLS_USE_PYTHON_ENVIRONMENT
@@ -71,7 +75,7 @@ namespace RL_TOOLS_MODULE_NAME{
 
 
 
-    using LOOP_CORE_CONFIG = LOOP_CORE_CONFIG_FACTORY<T, TI, RNG, ENVIRONMENT>;
+    using LOOP_CORE_CONFIG = LOOP_CORE_CONFIG_FACTORY<TYPE_POLICY, TI, RNG, ENVIRONMENT>;
 
 
 
@@ -87,7 +91,7 @@ namespace RL_TOOLS_MODULE_NAME{
     constexpr TI PARAMETER_NUM_EVALUATION_EPISODES = RL_TOOLS_NUM_EVALUATION_EPISODES;
 
     template <typename NEXT>
-    struct LOOP_EVAL_PARAMETERS: rlt::rl::loop::steps::evaluation::Parameters<T, TI, NEXT>{
+    struct LOOP_EVAL_PARAMETERS: rlt::rl::loop::steps::evaluation::Parameters<TYPE_POLICY, TI, NEXT>{
         static constexpr TI EVALUATION_INTERVAL = PARAMETER_EVALUATION_INTERVAL;
         static constexpr TI NUM_EVALUATION_EPISODES = PARAMETER_NUM_EVALUATION_EPISODES;
         static constexpr TI N_EVALUATIONS = NEXT::CORE_PARAMETERS::STEP_LIMIT / EVALUATION_INTERVAL;

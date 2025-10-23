@@ -10,8 +10,9 @@ namespace RL_TOOLS_MODULE_NAME{
     namespace rlt = rl_tools;
 
     // This should stay in sync with the parameters in https://github.com/rl-tools/rl-tools/blob/a98bc461f7ebfed0ba71c653216edec6d9334b78/include/rl_tools/rl/algorithms/td3/loop/core/config.h#L18
-    template <typename T, typename TI, typename ENVIRONMENT>
-    struct TD3_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::td3::loop::core::DefaultParameters<T, TI, ENVIRONMENT>{
+    template <typename TYPE_POLICY, typename TI, typename ENVIRONMENT>
+    struct TD3_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::td3::loop::core::DefaultParameters<TYPE_POLICY, TI, ENVIRONMENT>{
+        using T = typename TYPE_POLICY::DEFAULT;
         struct TD3_PARAMETERS{
             static constexpr T GAMMA = $GAMMA;
             static constexpr TI ACTOR_BATCH_SIZE = $ACTOR_BATCH_SIZE;
@@ -47,11 +48,11 @@ namespace RL_TOOLS_MODULE_NAME{
         static constexpr bool SHARED_BATCH = $SHARED_BATCH;
         static constexpr bool SAMPLE_ENVIRONMENT_PARAMETERS = true;
 
-        using INITIALIZER = rlt::nn::layers::dense::DefaultInitializer<T, TI>;
+        using INITIALIZER = rlt::nn::layers::dense::DefaultInitializer<TYPE_POLICY, TI>;
 
-        using BATCH_SAMPLING_PARAMETERS = rlt::rl::components::off_policy_runner::SequentialBatchParameters<T, TI, TD3_PARAMETERS::SEQUENCE_LENGTH, rlt::rl::components::off_policy_runner::SequentialBatchParametersDefault>;
+        using BATCH_SAMPLING_PARAMETERS = rlt::rl::components::off_policy_runner::SequentialBatchParameters<TYPE_POLICY, TI, TD3_PARAMETERS::SEQUENCE_LENGTH, rlt::rl::components::off_policy_runner::SequentialBatchParametersDefault>;
 
-        struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<T>{
+        struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<TYPE_POLICY>{
             static constexpr T ALPHA = $OPTIMIZER_ALPHA;
             static constexpr T BETA_1 = $OPTIMIZER_BETA_1;
             static constexpr T BETA_2 = $OPTIMIZER_BETA_2;
@@ -60,6 +61,6 @@ namespace RL_TOOLS_MODULE_NAME{
         };
     };
 
-    template <typename T, typename TI, typename RNG, typename ENVIRONMENT>
-    using LOOP_CORE_CONFIG_FACTORY = rlt::rl::algorithms::td3::loop::core::Config<T, TI, RNG, ENVIRONMENT, TD3_LOOP_CORE_PARAMETERS<T, TI, ENVIRONMENT>>;
+    template <typename TYPE_POLICY, typename TI, typename RNG, typename ENVIRONMENT>
+    using LOOP_CORE_CONFIG_FACTORY = rlt::rl::algorithms::td3::loop::core::Config<TYPE_POLICY, TI, RNG, ENVIRONMENT, TD3_LOOP_CORE_PARAMETERS<TYPE_POLICY, TI, ENVIRONMENT>>;
 }

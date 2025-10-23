@@ -7,8 +7,9 @@
 
 namespace rlt = rl_tools;
 
-template<typename T, typename TI, typename ENVIRONMENT>
-struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultParameters<T, TI, ENVIRONMENT>{
+template<typename TYPE_POLICY, typename TI, typename ENVIRONMENT>
+struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultParameters<TYPE_POLICY, TI, ENVIRONMENT>{
+    using T = typename TYPE_POLICY::DEFAULT;
     static constexpr TI STEP_LIMIT = $STEP_LIMIT;
     static constexpr TI ACTOR_HIDDEN_DIM = $ACTOR_HIDDEN_DIM;
     static constexpr TI ACTOR_NUM_LAYERS = $ACTOR_NUM_LAYERS;
@@ -22,7 +23,7 @@ struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultPa
     static constexpr TI DATASET_SIZE = ON_POLICY_RUNNER_STEPS_PER_ENV * N_ENVIRONMENTS;
     static constexpr TI BATCH_SIZE = $BATCH_SIZE;
 
-    struct PPO_PARAMETERS: rlt::rl::algorithms::ppo::DefaultParameters<T, TI, BATCH_SIZE>{
+    struct PPO_PARAMETERS: rlt::rl::algorithms::ppo::DefaultParameters<TYPE_POLICY, TI, BATCH_SIZE>{
         static constexpr T GAMMA = $GAMMA;
         static constexpr T LAMBDA = $LAMBDA;
         static constexpr T EPSILON_CLIP = $EPSILON_CLIP;
@@ -46,7 +47,7 @@ struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultPa
     };
 
 
-    struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<T>{
+    struct OPTIMIZER_PARAMETERS: rlt::nn::optimizers::adam::DEFAULT_PARAMETERS_TENSORFLOW<TYPE_POLICY>{
         static constexpr T ALPHA = $OPTIMIZER_ALPHA;
         static constexpr T BETA_1 = $OPTIMIZER_BETA_1;
         static constexpr T BETA_2 = $OPTIMIZER_BETA_2;
@@ -56,5 +57,5 @@ struct PPO_LOOP_CORE_PARAMETERS: rlt::rl::algorithms::ppo::loop::core::DefaultPa
 };
 
 
-template <typename T, typename TI, typename RNG, typename ENVIRONMENT>
-using LOOP_CORE_CONFIG_FACTORY = rlt::rl::algorithms::ppo::loop::core::Config<T, TI, RNG, ENVIRONMENT, PPO_LOOP_CORE_PARAMETERS<T, TI, ENVIRONMENT>>;
+template <typename TYPE_POLICY, typename TI, typename RNG, typename ENVIRONMENT>
+using LOOP_CORE_CONFIG_FACTORY = rlt::rl::algorithms::ppo::loop::core::Config<TYPE_POLICY, TI, RNG, ENVIRONMENT, PPO_LOOP_CORE_PARAMETERS<TYPE_POLICY, TI, ENVIRONMENT>>;
